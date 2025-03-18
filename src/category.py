@@ -1,4 +1,3 @@
-
 class Category:
     """
     Класс категорий продукта
@@ -9,13 +8,14 @@ class Category:
         category_count(int): Общее количество созданных категорий
         product_count(int): Общее количество созданных продукта
     """
+
     name: str
     description: str
     products: list
     category_count = 0
     product_count = 0
 
-    def __init__(self, name, description, products):
+    def __init__(self, name: str, description: str, products: list) -> None:
         """
         Метод для инициализации экземпляра категории
         :param name: Название категории

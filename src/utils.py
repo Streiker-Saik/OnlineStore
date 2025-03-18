@@ -1,10 +1,10 @@
 import json
 import logging
-
-from typing import Any, Dict, List
 from pathlib import Path
-from src.product import Product
+from typing import Any, Dict, List
+
 from src.category import Category
+from src.product import Product
 
 BASEDIR = Path(__file__).resolve().parent.parent
 
@@ -87,7 +87,7 @@ def created_object_from_json(data: List[Dict[str, Any]]) -> List[Category]:
             categories.append(Category(**category))
             utils_logger.info(f"Конвертирование {category} в объекты класса законченно успешно")
         except TypeError as exc_info:
-            error_message = f"Ошибка создания объекта из данных, категории {category}: {exc_info}"
+            error_message = f"Ошибка создания объекта из данных. {exc_info}"
             utils_logger.error(error_message)
             raise TypeError(error_message)
 

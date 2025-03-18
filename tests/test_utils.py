@@ -1,11 +1,13 @@
 import json
+from pathlib import Path
+from typing import Any, Dict, List
+
 import pytest
 
-from pathlib import Path
-from src.utils import reader_json, created_object_from_json
-from typing import List, Dict, Any
+from src.utils import created_object_from_json, reader_json
 
 BASEDIR = Path(__file__).resolve().parent.parent
+
 
 def test_reader_json_non_existent_file() -> None:
     """Тест, если файл JSON - не найден"""
@@ -77,23 +79,28 @@ def test_created_object_from_json(products_list: List[Dict[str, Any]]) -> None:
     """Тестирование проверяет конвертирование строки в объект класса"""
     result = created_object_from_json(products_list)
     assert result[0].name == "Смартфоны"
-    assert result[0].description == ("Смартфоны, как средство не только коммуникации, "
-                                     "но и получение дополнительных функций для удобства жизни")
+    assert result[0].description == (
+        "Смартфоны, как средство не только коммуникации, " "но и получение дополнительных функций для удобства жизни"
+    )
     assert len(result[0].products) == 3
     assert result[0].products[0].name == "Samsung Galaxy C23 Ultra"
     assert result[0].products[0].description == "256GB, Серый цвет, 200MP камера"
     assert result[0].products[0].price == 180000.0
     assert result[0].products[0].quantity == 5
     assert result[1].name == "Телевизоры"
-    assert result[1].description == ("Современный телевизор, который позволяет наслаждаться просмотром, "
-                                     "станет вашим другом и помощником")
+    assert result[1].description == (
+        "Современный телевизор, который позволяет наслаждаться просмотром, " "станет вашим другом и помощником"
+    )
     assert len(result[1].products) == 1
 
 
 def test_created_object_from_json_crash() -> None:
     """"""
-    data = [{"name": "xxx", "description": "xxx", "products": ["xxx"]}, {"name": "xxx", "description": "xxx", "products": ["xxx"]}]
+    data = [
+        {"name": "xxx", "description": "xxx", "products": ["xxx"]},
+        {"name": "xxx", "description": "xxx", "products": ["xxx"]},
+    ]
     with pytest.raises(TypeError) as exc_info:
         created_object_from_json(data)
 
-    assert "Ошибка создания объекта из данных, категории" in str(exc_info.value)
+    assert "Ошибка создания объекта из данных." in str(exc_info.value)

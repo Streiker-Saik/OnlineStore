@@ -1,4 +1,3 @@
-
 class Product:
     """
     Класс для предоставления продукта
@@ -8,12 +7,13 @@ class Product:
         price(float): Цена продукта
         quantity(int): Количество продукта
     """
+
     name: str
     description: str
     price: float
     quantity: int
 
-    def __init__(self, name, description, price, quantity):
+    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         """
         Метод для инициализации экземпляра продукта
         :param name: Название продукта
