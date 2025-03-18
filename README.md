@@ -2,7 +2,8 @@
 
 ## Описание:
 
-
+Новые классы: Category, Product\
+Реализованна функциональность конвертации из json в объекты класса
 
 ## Проверить версию Python:
 
@@ -37,13 +38,67 @@ poetry add --group lint flake8 black isort mypy
 poetry add --group dev pytest pytest-cov
 ```
 
-## Примеры работы функций:
+# Примеры работы функций:
 
-- принимает
-- возвращает 
+## Модуль src.product.py
+class Product:
+```
+Атрибуты:
+        name(str): Название продукта
+        description(str): Описание продукта
+        price(float): Цена продукта
+        quantity(int): Количество продукта
 ```
 
+## Модуль src.category.py
+class Category:
+```
+Атрибуты:
+    name(str): Название категории
+    description(str): Описание категории
+    products(list): Список продукта
+    category_count(int): Общее количество созданных категорий
+    product_count(int): Общее количество созданных продукта
+```
+Увеличивает счетчик категорий(category_count) при создании нового экземпляра 
+и устанавливает количество продуктов(product_count) в данной категории.
+
+## Модуль src.utils.py
+reader_json
+- принимает путь к json файлу
+- возвращает список словарей объект Python
+```
+reader_json(data/product.json)
 >>>
+[{...},...]
+```
+
+created_object_from_json (использует src.product и src.category)
+- принимает список словарей, с содержанием категории и ее продуктов
+- возвращает список объектов Category
+```
+date = [
+  {
+    "name": "Смартфоны",
+    "description": "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни",
+    "products": [
+      {
+        "name": "Samsung Galaxy C23 Ultra",
+        "description": "256GB, Серый цвет, 200MP камера",
+        "price": 180000.0,
+        "quantity": 5
+      },
+      ...
+    ]
+  },
+  ...
+]
+category = created_object_from_json(date)
+>>>
+category = [<src.category.Category object at 0x000001D70DCA9550>, ...]
+category[0].name = Смартфоны
+category[0].products = [<src.product.Product object at 0x000001D70DCA9400>, ... ]
+category[0].products[0].name = "Samsung Galaxy C23 Ultra"
 
 ```
 

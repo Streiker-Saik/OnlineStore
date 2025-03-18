@@ -92,3 +92,12 @@ def created_object_from_json(data: List[Dict[str, Any]]) -> List[Category]:
             raise TypeError(error_message)
 
     return categories
+
+
+if __name__ == '__main__':
+    data = reader_json("data/products.json")
+    category = created_object_from_json(data)
+    print(category)
+    print(category[0].name)
+    print(category[0].products)
+    print(category[0].products[0].name)
