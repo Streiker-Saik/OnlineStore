@@ -1,3 +1,4 @@
+
 def test_init_product(first_product) -> None:
     """Тестирование корректной инициализации класса Product"""
     assert first_product.name ==  "Samsung Galaxy C23 Ultra"

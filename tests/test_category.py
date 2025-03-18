@@ -1,3 +1,4 @@
+
 def test_init_category(first_category) -> None:
     """Тестирование корректной инициализации класса Category"""
     assert first_category.name == "Смартфоны"
@@ -6,4 +7,3 @@ def test_init_category(first_category) -> None:
     assert len(first_category.products) == 2
     assert first_category.category_count == 1
     assert first_category.product_count == 2
-
