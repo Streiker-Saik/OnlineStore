@@ -54,7 +54,7 @@ class Product:
         get_products(self) -> List[Product]:
             Getter. Возвращает список продуктов в категории
         add_product(self, product: Product) -> None:
-            Метод. Добавляет в категорию продукт и обновляет счетчик
+            Добавляет в категорию продукт и обновляет счетчик
         products(self) -> str:
             Getter. Возвращает строку с информацией о продуктах о продуктах в категории. Формат:
             <name>, <price> руб. Остаток: <quantity> шт.
@@ -69,6 +69,12 @@ class Category:
     products(list): Список продукта
     category_count(int): Общее количество созданных категорий
     product_count(int): Общее количество созданных продукта
+Методы:
+    __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        Инициализирует экземпляр класса Product с заданными атрибутам
+    new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
+        Создает новый экземпляр класса Product на основе данных из словаря.
+        Если такой продукт с name существует в списке, обновляет количество и цену
 ```
 Увеличивает счетчик категорий(category_count) при создании нового экземпляра 
 и устанавливает количество продуктов(product_count) в данной категории.
