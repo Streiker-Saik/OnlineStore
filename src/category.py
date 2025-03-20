@@ -1,19 +1,29 @@
 from typing import Optional, List
 
-from unicodedata import category
-
 from src.product import Product
 
 
 class Category:
     """
     Класс категорий продукта
+
     Атрибуты:
         name(str): Название категории
         description(str): Описание категории
         products(List[Product]): Список продукта
         category_count(int): Общее количество созданных категорий
-        product_count(int): Общее количество созданных продукта
+        product_count(int): Общее количество продуктов во всех категориях
+
+    Методы:
+        __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
+            Инициализирует экземпляр класса Category с заданными атрибутам
+        get_products(self) -> List[Product]:
+            Getter. Возвращает список продуктов в категории
+        add_product(self, product: Product) -> None:
+            Метод. Добавляет в категорию продукт и обновляет счетчик
+        products(self) -> str:
+            Getter. Возвращает строку с информацией о продуктах о продуктах в категории. Формат:
+            <name>, <price> руб. Остаток: <quantity> шт.
     """
 
     name: str
@@ -41,7 +51,10 @@ class Category:
 
     @property
     def get_products(self) -> List[Product]:
-        """Возвращает список продуктов в категории"""
+        """
+        Getter выводит список продуктов
+        :return: Список продуктов в категории
+        """
         return self.__products
 
 
@@ -56,7 +69,11 @@ class Category:
 
     @property
     def products(self) -> str:
-        """Возвращает строку с информацией о продуктах в категории"""
+        """
+        Getter выводит строку информации о продуктах
+        :return: Строку с информацией о продуктах в категории. Формат:
+            <name>, <price> руб. Остаток: <quantity> шт
+        """
         products_str = ""
         for product in self.__products:
             products_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
