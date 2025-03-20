@@ -10,7 +10,7 @@ class Category:
     Атрибуты:
         name(str): Название категории
         description(str): Описание категории
-        products(List[Product]): Список продукта
+        products(List[Product]): Список продукта (private)
         category_count(int): Общее количество созданных категорий
         product_count(int): Общее количество продуктов во всех категориях
 

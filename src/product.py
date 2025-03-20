@@ -7,7 +7,7 @@ class Product:
     Атрибуты:
         name(str): Название продукта
         description(str): Описание продукта
-        price(float): Цена продукта
+        price(float): Цена продукта (private)
         quantity(int): Количество продукта
     Методы:
         __init__(self, name: str, description: str, price: float, quantity: int) -> None:

@@ -46,7 +46,7 @@ class Product:
 Атрибуты:
         name(str): Название продукта
         description(str): Описание продукта
-        price(float): Цена продукта
+        price(float): Цена продукта (private)
         quantity(int): Количество продукта
 Методы:
         __init__(self, name: str, description: str, price: float, quantity: int) -> None:
@@ -68,7 +68,7 @@ class Category:
 Атрибуты:
     name(str): Название категории
     description(str): Описание категории
-    products(list): Список продукта
+    products(list): Список продукта (private)
     category_count(int): Общее количество созданных категорий
     product_count(int): Общее количество созданных продукта
 Методы:
@@ -119,8 +119,8 @@ category = created_object_from_json(date)
 >>>
 category = [<src.category.Category object at 0x000001D70DCA9550>, ...]
 category[0].name = Смартфоны
-category[0].products = [<src.product.Product object at 0x000001D70DCA9400>, ... ]
-category[0].products[0].name = "Samsung Galaxy C23 Ultra"
+category[0].get_products = [<src.product.Product object at 0x000001D70DCA9400>, ... ]
+category[0].get_products[0].name = "Samsung Galaxy C23 Ultra"
 
 ```
 
