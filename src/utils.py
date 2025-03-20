@@ -5,14 +5,9 @@ from typing import Any, Dict, List
 
 from src.category import Category
 from src.product import Product
+from src.settings import BASE_DIR, LOGS_DIR
 
-BASEDIR = Path(__file__).resolve().parent.parent
-
-# создание абсолютного пути
-log_dir = BASEDIR / "logs"
-log_file = log_dir / "utils.log"
-# создаем директорию если она не существует
-log_dir.mkdir(parents=True, exist_ok=True)
+log_file = LOGS_DIR / "utils.log"
 
 utils_logger = logging.getLogger("utils")
 file_handler = logging.FileHandler(log_file, mode="w", encoding="utf-8")
@@ -28,7 +23,7 @@ def reader_json(file_path: str) -> List[Dict[str, Any]]:
     :param file_path: путь до JSON-файла
     :return: список словарей с данными
     """
-    path = BASEDIR / file_path
+    path = BASE_DIR / file_path
 
     if not path.exists():
         utils_logger.error(f"Файл '{file_path}' - не найден")
