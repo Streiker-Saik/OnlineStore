@@ -49,15 +49,17 @@ class Product:
         price(float): Цена продукта
         quantity(int): Количество продукта
 Методы:
-        __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
-            Инициализирует экземпляр класса Category с заданными атрибутам
-        get_products(self) -> List[Product]:
-            Getter. Возвращает список продуктов в категории
-        add_product(self, product: Product) -> None:
-            Добавляет в категорию продукт и обновляет счетчик
-        products(self) -> str:
-            Getter. Возвращает строку с информацией о продуктах о продуктах в категории. Формат:
-            <name>, <price> руб. Остаток: <quantity> шт.
+        __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+            Инициализирует экземпляр класса Product с заданными атрибутам
+        new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
+            Создает новый экземпляр класса Product на основе данных из словаря.
+            Если такой продукт с name существует в списке, обновляет количество и цену
+        price(self) -> float:
+            Getter: возвращает значение цены
+        price(self, new_price: float) -> None:
+            Setter: заменяет значение цены. 
+            При меньше или равное 0 выводит сообщение предупреждения. 
+            При уменьшении цены запрашивает у пользователя подтверждение
 ```
 
 ## Модуль src.category.py
@@ -70,11 +72,15 @@ class Category:
     category_count(int): Общее количество созданных категорий
     product_count(int): Общее количество созданных продукта
 Методы:
-    __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-        Инициализирует экземпляр класса Product с заданными атрибутам
-    new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
-        Создает новый экземпляр класса Product на основе данных из словаря.
-        Если такой продукт с name существует в списке, обновляет количество и цену
+        __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
+            Инициализирует экземпляр класса Category с заданными атрибутам
+        get_products(self) -> List[Product]:
+            Getter: возвращает список продуктов в категории
+        add_product(self, product: Product) -> None:
+            Метод: добавляет в категорию продукт и обновляет счетчик
+        products(self) -> str:
+            Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
+            <name>, <price> руб. Остаток: <quantity> шт.
 ```
 Увеличивает счетчик категорий(category_count) при создании нового экземпляра 
 и устанавливает количество продуктов(product_count) в данной категории.

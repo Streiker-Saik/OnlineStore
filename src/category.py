@@ -18,11 +18,11 @@ class Category:
         __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
             Инициализирует экземпляр класса Category с заданными атрибутам
         get_products(self) -> List[Product]:
-            Getter. Возвращает список продуктов в категории
+            Getter: возвращает список продуктов в категории
         add_product(self, product: Product) -> None:
-            Метод. Добавляет в категорию продукт и обновляет счетчик
+            Метод: добавляет в категорию продукт и обновляет счетчик
         products(self) -> str:
-            Getter. Возвращает строку с информацией о продуктах о продуктах в категории. Формат:
+            Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
             <name>, <price> руб. Остаток: <quantity> шт.
     """
 

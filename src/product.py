@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 class Product:
     """
@@ -11,13 +11,19 @@ class Product:
     Методы:
         __init__(self, name: str, description: str, price: float, quantity: int) -> None:
             Инициализирует экземпляр класса Product с заданными атрибутам
-        new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
+        new_product(cls, product: Dict[str, Any], existing_products: Optional[List['Product']] -> 'Product':
             Создает новый экземпляр класса Product на основе данных из словаря.
             Если такой продукт с name существует в списке, обновляет количество и цену
+        price(self) -> float:
+            Getter: возвращает значение цены
+        price(self, new_price: float) -> None:
+            Setter: заменяет значение цены.
+            При меньше или равное 0 выводит сообщение предупреждения.
+            При уменьшении цены запрашивает у пользователя подтверждение
     """
     name: str
     description: str
-    price: float
+    __price: float
     quantity: int
 
 
@@ -31,7 +37,7 @@ class Product:
         """
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
 
 
@@ -59,3 +65,31 @@ class Product:
         )
         existing_products.append(new_product)
         return new_product
+
+
+    @property
+    def price(self) -> float:
+        """
+        Getter выводит цену
+        :return: Цена
+        """
+        return self.__price
+
+
+    @price.setter
+    def price(self, new_price: float) -> None:
+        """
+        Setter сравнивает цену, если она меньше\равна 0, выводит сообщение
+        :param new_price: Новое значение цены
+        :return: "Цена не должна быть нулевая или отрицательная"
+        При понижении цены запрашивает у пользователя понижать ли ее.
+        """
+        if new_price <= 0:
+            print("Цена не должна быть нулевая или отрицательная")
+            return
+        elif self.price > new_price:
+            user_out = input("Понизить цену? введите Y/N (yes/no): ")
+            if user_out.lower() in ("y", "yes"):
+                self.__price = new_price
+        else:
+            self.__price = new_price

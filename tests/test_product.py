@@ -1,3 +1,5 @@
+from unittest.mock import patch, MagicMock
+
 from src.product import Product
 
 
@@ -31,3 +33,22 @@ def test_new_product() -> None:
     assert product.price == 210000.0
     assert product.quantity == 8
     assert len(existing_products) == 2
+
+
+def test_product_update(capsys, first_product: Product) -> None:
+    """Тестирование на ввод корректной цены больше 0"""
+    first_product.price = -100.5
+    message = capsys.readouterr()
+    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+
+
+@patch("builtins.input")
+def test_product_correct(mock_input: MagicMock, first_product: Product) -> None:
+    """Тестирование на наличие предупреждения при уменьшении цены"""
+    assert first_product.price == 180000.0
+    mock_input.return_value = "n"
+    first_product.price = 120000.0
+    assert first_product.price == 180000.0
+    mock_input.return_value = "y"
+    first_product.price = 120000.0
+    assert first_product.price == 120000.0
