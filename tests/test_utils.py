@@ -82,16 +82,16 @@ def test_created_object_from_json(products_list: List[Dict[str, Any]]) -> None:
     assert result[0].description == (
         "Смартфоны, как средство не только коммуникации, " "но и получение дополнительных функций для удобства жизни"
     )
-    assert len(result[0].products) == 3
-    assert result[0].products[0].name == "Samsung Galaxy C23 Ultra"
-    assert result[0].products[0].description == "256GB, Серый цвет, 200MP камера"
-    assert result[0].products[0].price == 180000.0
-    assert result[0].products[0].quantity == 5
+    assert len(result[0].get_products) == 3
+    assert result[0].get_products[0].name == "Samsung Galaxy C23 Ultra"
+    assert result[0].get_products[0].description == "256GB, Серый цвет, 200MP камера"
+    assert result[0].get_products[0].price == 180000.0
+    assert result[0].get_products[0].quantity == 5
     assert result[1].name == "Телевизоры"
     assert result[1].description == (
         "Современный телевизор, который позволяет наслаждаться просмотром, " "станет вашим другом и помощником"
     )
-    assert len(result[1].products) == 1
+    assert len(result[1].get_products) == 1
 
 
 def test_created_object_from_json_crash() -> None:

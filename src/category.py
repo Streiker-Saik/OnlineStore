@@ -1,5 +1,7 @@
 from typing import Optional, List
 
+from unicodedata import category
+
 from src.product import Product
 
 
@@ -36,10 +38,12 @@ class Category:
         Category.category_count += 1
         Category.product_count = len(self.__products) if self.__products else 0
 
+
     @property
-    def products(self) -> List[Product]:
+    def get_products(self) -> List[Product]:
         """Возвращает список продуктов в категории"""
         return self.__products
+
 
     def add_product(self, product: Product) -> None:
         """
@@ -48,3 +52,12 @@ class Category:
         """
         self.__products.append(product)
         Category.product_count += 1
+
+
+    @property
+    def products(self) -> str:
+        """Возвращает строку с информацией о продуктах в категории"""
+        products_str = ""
+        for product in self.__products:
+            products_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+        return products_str.strip()
