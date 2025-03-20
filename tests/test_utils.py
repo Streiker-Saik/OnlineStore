@@ -4,8 +4,8 @@ from typing import Any, Dict, List
 
 import pytest
 
-from src.utils import created_object_from_json, reader_json
 from src.settings import BASE_DIR
+from src.utils import created_object_from_json, reader_json
 
 
 def test_reader_json_non_existent_file() -> None:

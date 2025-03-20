@@ -1,15 +1,15 @@
 import json
 import logging
-from pathlib import Path
 from typing import Any, Dict, List
 
 from src.category import Category
 from src.product import Product
 from src.settings import BASE_DIR, LOGS_DIR
 
-log_file = LOGS_DIR / "utils.log"
+name_file = "utils.log"
+log_file = LOGS_DIR / name_file
 
-utils_logger = logging.getLogger("utils")
+utils_logger = logging.getLogger(name_file)
 file_handler = logging.FileHandler(log_file, mode="w", encoding="utf-8")
 file_formater = logging.Formatter("%(asctime)s - %(name)s: %(funcName)s - %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formater)

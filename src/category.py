@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from src.product import Product
 
@@ -48,7 +48,6 @@ class Category:
         Category.category_count += 1
         Category.product_count = len(self.__products) if self.__products else 0
 
-
     @property
     def get_products(self) -> List[Product]:
         """
@@ -57,7 +56,6 @@ class Category:
         """
         return self.__products
 
-
     def add_product(self, product: Product) -> None:
         """
         Метод добавляет в категорию продукт и обновляет счетчик
@@ -65,7 +63,6 @@ class Category:
         """
         self.__products.append(product)
         Category.product_count += 1
-
 
     @property
     def products(self) -> str:

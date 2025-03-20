@@ -1,4 +1,5 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
+
 
 class Product:
     """
@@ -21,11 +22,11 @@ class Product:
             При меньше или равное 0 выводит сообщение предупреждения.
             При уменьшении цены запрашивает у пользователя подтверждение
     """
+
     name: str
     description: str
     __price: float
     quantity: int
-
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         """
@@ -40,9 +41,8 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
-
     @classmethod
-    def new_product(cls, product: Dict[str, Any], existing_products: Optional[List['Product']] = None) -> 'Product':
+    def new_product(cls, product: Dict[str, Any], existing_products: Optional[List["Product"]] = None) -> "Product":
         """
         Классовый метод преобразования из словаря в объект класса
         :param product: Словарь с параметрами продукта
@@ -52,6 +52,9 @@ class Product:
             Если продукт с таким именем уже существует, обновляет его количество и цену.
             В противном случае создает новый продукт.
         """
+        if existing_products is None:
+            existing_products = []
+
         for existing_product in existing_products:
             if existing_product.name == product.get("name", ""):
                 existing_product.quantity += product.get("quantity", 0)
@@ -61,11 +64,10 @@ class Product:
             name=product.get("name", ""),
             description=product.get("description", ""),
             price=product.get("price", 0.0),
-            quantity=product.get("quantity", 0)
+            quantity=product.get("quantity", 0),
         )
         existing_products.append(new_product)
         return new_product
-
 
     @property
     def price(self) -> float:
@@ -75,11 +77,10 @@ class Product:
         """
         return self.__price
 
-
     @price.setter
     def price(self, new_price: float) -> None:
         """
-        Setter сравнивает цену, если она меньше\равна 0, выводит сообщение
+        Setter сравнивает цену, если она меньше/равна 0, выводит сообщение
         :param new_price: Новое значение цены
         :return: "Цена не должна быть нулевая или отрицательная"
         При понижении цены запрашивает у пользователя понижать ли ее.
