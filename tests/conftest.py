@@ -4,7 +4,7 @@ import pytest
 
 from src.category import Category
 from src.product import Product
-from src.products_iterator import ProductIterator
+from src.products_iterator import ProductsIterator
 
 
 @pytest.fixture
@@ -41,8 +41,8 @@ def first_category() -> Category:
 
 
 @pytest.fixture
-def products_iterator(first_category: Category) -> ProductIterator:
-    return ProductIterator(first_category)
+def products_iterator(first_category: Category) -> ProductsIterator:
+    return ProductsIterator(first_category)
 
 
 @pytest.fixture

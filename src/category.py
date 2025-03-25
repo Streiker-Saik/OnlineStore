@@ -54,7 +54,7 @@ class Category:
         :return: Строка отображения класса. Формат:
         <name>, количество продуктов: <sum(product.quantity)> шт.
         """
-        total_quantity =sum(product.quantity for product in self.__products)
+        total_quantity = sum(product.quantity for product in self.__products)
         return f"{self.name}, количество продуктов: {total_quantity} шт."
 
     @property

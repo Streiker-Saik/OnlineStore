@@ -51,7 +51,7 @@ class Product:
         """
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
 
-    def __add__(self, other: 'Product') -> float:
+    def __add__(self, other: "Product") -> float:
         """
         Суммирование двух продуктов общей стоимости товаров
         :param other: экземпляр класса Product, который будет добавлен

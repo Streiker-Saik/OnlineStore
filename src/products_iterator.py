@@ -1,8 +1,10 @@
-from src.product import Product
-from src.category import Category
 from typing import Iterator
 
-class ProductIterator:
+from src.category import Category
+from src.product import Product
+
+
+class ProductsIterator:
     """
     Итератор класса Category, позволяющий перебирать продукты в категории
 
@@ -16,6 +18,7 @@ class ProductIterator:
         __next__(self) -> Product:
             Возвращает следующий продукт в категории
     """
+
     category_obj: Category
 
     def __init__(self, category_obj: Category) -> None:
