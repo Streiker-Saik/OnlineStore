@@ -43,6 +43,14 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self) -> str:
+        """
+        Магический метод, строковое отображение класса.
+        :return: Строка отображения класса. Формат:
+        <name>, <price> руб. Остаток: <quantity> шт.
+        """
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
     @classmethod
     def new_product(cls, product: Dict[str, Any], existing_products: Optional[List["Product"]] = None) -> "Product":
         """

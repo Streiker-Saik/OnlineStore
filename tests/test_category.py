@@ -35,3 +35,8 @@ def test_category_products_list_property(first_category: Category) -> None:
     assert first_category.products == (
         "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.\n" "Iphone 15, 210000.0 руб. Остаток: 8 шт."
     )
+
+
+def test_product_str(first_category: Product) -> None:
+    """Тестирование строкового отображения класса"""
+    assert str(first_category) == "Смартфоны, количество продуктов: 13 шт."

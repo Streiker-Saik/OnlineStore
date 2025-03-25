@@ -51,6 +51,9 @@ class Product:
 Методы:
         __init__(self, name: str, description: str, price: float, quantity: int) -> None:
             Инициализирует экземпляр класса Product с заданными атрибутам
+        __str__(self) -> str:
+            возвращает строковое отображение класса Product, формат:
+            <name>, <price> руб. Остаток: <quantity> шт. 
         new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
             Создает новый экземпляр класса Product на основе данных из словаря.
             Если такой продукт с name существует в списке, обновляет количество и цену
@@ -74,6 +77,9 @@ class Category:
 Методы:
         __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
             Инициализирует экземпляр класса Category с заданными атрибутам
+        __str__(self) -> str:
+            возвращает строковое отображение класса Category, формат:
+            <name>, количество продуктов: <sum(product.quantity)> шт.
         get_products(self) -> List[Product]:
             Getter: возвращает список продуктов в категории
         add_product(self, product: Product) -> None:

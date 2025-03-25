@@ -66,3 +66,8 @@ def test_product_correct(mock_input: MagicMock, first_product: Product) -> None:
     mock_input.return_value = "y"
     first_product.price = 120000.0
     assert first_product.price == 120000.0
+
+
+def test_product_str(first_product: Product) -> None:
+    """Тестирование строкового отображения класса"""
+    assert str(first_product) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
