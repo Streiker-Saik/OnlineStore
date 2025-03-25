@@ -52,8 +52,11 @@ class Product:
         __init__(self, name: str, description: str, price: float, quantity: int) -> None:
             Инициализирует экземпляр класса Product с заданными атрибутам
         __str__(self) -> str:
-            возвращает строковое отображение класса Product, формат:
-            <name>, <price> руб. Остаток: <quantity> шт. 
+            Возвращает строковое отображение класса Product, формат:
+            <name>, <price> руб. Остаток: <quantity> шт.
+        __add__(self, other) -> float:
+            Возвращает общую стоимость товаров, как сумма стоимости товаров умноженная на их количество
+            TypeError: Если переданный аргумент не является экземпляром класса Product.
         new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
             Создает новый экземпляр класса Product на основе данных из словаря.
             Если такой продукт с name существует в списке, обновляет количество и цену
