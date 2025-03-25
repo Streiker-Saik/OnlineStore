@@ -1,16 +1,33 @@
+from typing import Any, Dict, List, Optional
+
+
 class Product:
     """
     Класс для предоставления продукта
+
     Атрибуты:
         name(str): Название продукта
         description(str): Описание продукта
-        price(float): Цена продукта
+        price(float): Цена продукта (private)
         quantity(int): Количество продукта
+
+    Методы:
+        __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+            Инициализирует экземпляр класса Product с заданными атрибутам
+        new_product(cls, product: Dict[str, Any], existing_products: Optional[List['Product']] -> 'Product':
+            Создает новый экземпляр класса Product на основе данных из словаря.
+            Если такой продукт с name существует в списке, обновляет количество и цену
+        price(self) -> float:
+            Getter: возвращает значение цены
+        price(self, new_price: float) -> None:
+            Setter: заменяет значение цены.
+            При меньше или равное 0 выводит сообщение предупреждения.
+            При уменьшении цены запрашивает у пользователя подтверждение
     """
 
     name: str
     description: str
-    price: float
+    __price: float
     quantity: int
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
@@ -23,5 +40,59 @@ class Product:
         """
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
+
+    @classmethod
+    def new_product(cls, product: Dict[str, Any], existing_products: Optional[List["Product"]] = None) -> "Product":
+        """
+        Классовый метод преобразования из словаря в объект класса
+        :param product: Словарь с параметрами продукта
+            Ожидаемые ключи: name, description, price, quantity
+        :param existing_products: Список существующих продуктов(по умолчанию пустой)
+        :return: Экземпляр класса Product
+            Если продукт с таким именем уже существует, обновляет его количество и цену.
+            В противном случае создает новый продукт.
+        """
+        if existing_products is None:
+            existing_products = []
+
+        for existing_product in existing_products:
+            if existing_product.name == product.get("name"):
+                existing_product.quantity += product.get("quantity", 0)
+                existing_product.price = max(existing_product.price, product.get("price", existing_product.price))
+                return existing_product
+        new_product = cls(
+            name=product.get("name", ""),
+            description=product.get("description", ""),
+            price=product.get("price", 0.0),
+            quantity=product.get("quantity", 0),
+        )
+        existing_products.append(new_product)
+        return new_product
+
+    @property
+    def price(self) -> float:
+        """
+        Getter выводит цену
+        :return: Цена
+        """
+        return self.__price
+
+    @price.setter
+    def price(self, new_price: float) -> None:
+        """
+        Setter сравнивает цену, если она меньше/равна 0, выводит сообщение
+        :param new_price: Новое значение цены
+        :return: "Цена не должна быть нулевая или отрицательная"
+        При понижении цены запрашивает у пользователя понижать ли ее.
+        """
+        if new_price <= 0:
+            print("Цена не должна быть нулевая или отрицательная")
+            return
+        elif self.__price > new_price:
+            user_out = input("Понизить цену? введите Y/N (yes/no): ")
+            if user_out.lower() in ("y", "yes"):
+                self.__price = new_price
+        else:
+            self.__price = new_price

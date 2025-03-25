@@ -4,9 +4,8 @@ from typing import Any, Dict, List
 
 import pytest
 
+from src.settings import BASE_DIR
 from src.utils import created_object_from_json, reader_json
-
-BASEDIR = Path(__file__).resolve().parent.parent
 
 
 def test_reader_json_non_existent_file() -> None:
@@ -19,7 +18,7 @@ def test_reader_json() -> None:
     """Тест работы функции"""
     try:
         file_path = "test.json"
-        path: Path = BASEDIR / file_path
+        path: Path = BASE_DIR / file_path
         date = [{"key": "value"}, {"key": "value"}]
         with open(path, "w", encoding="utf-8") as file_json:
             json.dump(date, file_json, indent=4, ensure_ascii=False)
@@ -34,7 +33,7 @@ def test_reader_json_empty_list() -> None:
     """Тест, если файл JSON - с пустым списком"""
     try:
         file_path = "test.json"
-        path: Path = BASEDIR / file_path
+        path: Path = BASE_DIR / file_path
         date: List = []
         with open(path, "w", encoding="utf-8") as file_json:
             json.dump(date, file_json, indent=4, ensure_ascii=False)
@@ -49,7 +48,7 @@ def test_reader_json_invalid() -> None:
     """Тест, если файл JSON - с некорректными данными"""
     try:
         file_path = "test.json"
-        path: Path = BASEDIR / file_path
+        path: Path = BASE_DIR / file_path
         data = "некорректные данные"
         with open(file_path, "w", encoding="utf-8") as file_json:
             file_json.write(data)
@@ -64,7 +63,7 @@ def test_reader_json_not_list() -> None:
     """Тест, если файл JSON - не со списком"""
     try:
         file_path = "test.json"
-        path: Path = BASEDIR / file_path
+        path: Path = BASE_DIR / file_path
         data: str = ""
         with open(file_path, "w", encoding="utf-8") as file_json:
             json.dump(data, file_json, indent=4, ensure_ascii=False)
@@ -82,16 +81,16 @@ def test_created_object_from_json(products_list: List[Dict[str, Any]]) -> None:
     assert result[0].description == (
         "Смартфоны, как средство не только коммуникации, " "но и получение дополнительных функций для удобства жизни"
     )
-    assert len(result[0].products) == 3
-    assert result[0].products[0].name == "Samsung Galaxy C23 Ultra"
-    assert result[0].products[0].description == "256GB, Серый цвет, 200MP камера"
-    assert result[0].products[0].price == 180000.0
-    assert result[0].products[0].quantity == 5
+    assert len(result[0].get_products) == 3
+    assert result[0].get_products[0].name == "Samsung Galaxy C23 Ultra"
+    assert result[0].get_products[0].description == "256GB, Серый цвет, 200MP камера"
+    assert result[0].get_products[0].price == 180000.0
+    assert result[0].get_products[0].quantity == 5
     assert result[1].name == "Телевизоры"
     assert result[1].description == (
         "Современный телевизор, который позволяет наслаждаться просмотром, " "станет вашим другом и помощником"
     )
-    assert len(result[1].products) == 1
+    assert len(result[1].get_products) == 1
 
 
 def test_created_object_from_json_crash() -> None:

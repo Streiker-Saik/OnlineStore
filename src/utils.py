@@ -1,20 +1,15 @@
 import json
 import logging
-from pathlib import Path
 from typing import Any, Dict, List
 
 from src.category import Category
 from src.product import Product
+from src.settings import BASE_DIR, LOGS_DIR
 
-BASEDIR = Path(__file__).resolve().parent.parent
+name_file = "utils.log"
+log_file = LOGS_DIR / name_file
 
-# создание абсолютного пути
-log_dir = BASEDIR / "logs"
-log_file = log_dir / "utils.log"
-# создаем директорию если она не существует
-log_dir.mkdir(parents=True, exist_ok=True)
-
-utils_logger = logging.getLogger("utils")
+utils_logger = logging.getLogger(name_file)
 file_handler = logging.FileHandler(log_file, mode="w", encoding="utf-8")
 file_formater = logging.Formatter("%(asctime)s - %(name)s: %(funcName)s - %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formater)
@@ -28,7 +23,7 @@ def reader_json(file_path: str) -> List[Dict[str, Any]]:
     :param file_path: путь до JSON-файла
     :return: список словарей с данными
     """
-    path = BASEDIR / file_path
+    path = BASE_DIR / file_path
 
     if not path.exists():
         utils_logger.error(f"Файл '{file_path}' - не найден")
@@ -92,12 +87,3 @@ def created_object_from_json(data: List[Dict[str, Any]]) -> List[Category]:
             raise TypeError(error_message)
 
     return categories
-
-
-if __name__ == '__main__':
-    data = reader_json("data/products.json")
-    category = created_object_from_json(data)
-    print(category)
-    print(category[0].name)
-    print(category[0].products)
-    print(category[0].products[0].name)

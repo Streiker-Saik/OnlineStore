@@ -46,8 +46,20 @@ class Product:
 Атрибуты:
         name(str): Название продукта
         description(str): Описание продукта
-        price(float): Цена продукта
+        price(float): Цена продукта (private)
         quantity(int): Количество продукта
+Методы:
+        __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+            Инициализирует экземпляр класса Product с заданными атрибутам
+        new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
+            Создает новый экземпляр класса Product на основе данных из словаря.
+            Если такой продукт с name существует в списке, обновляет количество и цену
+        price(self) -> float:
+            Getter: возвращает значение цены
+        price(self, new_price: float) -> None:
+            Setter: заменяет значение цены. 
+            При меньше или равное 0 выводит сообщение предупреждения. 
+            При уменьшении цены запрашивает у пользователя подтверждение
 ```
 
 ## Модуль src.category.py
@@ -56,9 +68,20 @@ class Category:
 Атрибуты:
     name(str): Название категории
     description(str): Описание категории
-    products(list): Список продукта
+    products(list): Список продукта (private)
     category_count(int): Общее количество созданных категорий
     product_count(int): Общее количество созданных продукта
+Методы:
+        __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
+            Инициализирует экземпляр класса Category с заданными атрибутам
+        get_products(self) -> List[Product]:
+            Getter: возвращает список продуктов в категории
+        add_product(self, product: Product) -> None:
+            Метод: добавляет в категорию продукт и обновляет счетчик, если его не было в списке
+            TypeError: Если переданный аргумент не является экземпляром класса Product.
+        products(self) -> str:
+            Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
+            <name>, <price> руб. Остаток: <quantity> шт.
 ```
 Увеличивает счетчик категорий(category_count) при создании нового экземпляра 
 и устанавливает количество продуктов(product_count) в данной категории.
@@ -97,8 +120,8 @@ category = created_object_from_json(date)
 >>>
 category = [<src.category.Category object at 0x000001D70DCA9550>, ...]
 category[0].name = Смартфоны
-category[0].products = [<src.product.Product object at 0x000001D70DCA9400>, ... ]
-category[0].products[0].name = "Samsung Galaxy C23 Ultra"
+category[0].get_products = [<src.product.Product object at 0x000001D70DCA9400>, ... ]
+category[0].get_products[0].name = "Samsung Galaxy C23 Ultra"
 
 ```
 
