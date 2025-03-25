@@ -1,7 +1,10 @@
-from unittest.mock import MagicMock, patch
 from typing import List
-from src.product import Product
+from unittest.mock import MagicMock, patch
+
 import pytest
+
+from src.product import Product
+
 
 def test_init_product(first_product: Product) -> None:
     """Тестирование корректной инициализации класса Product"""
@@ -19,6 +22,7 @@ def test_new_product() -> None:
     assert product.description == "1024GB, Синий"
     assert product.price == 31000.0
     assert product.quantity == 14
+
 
 def test_new_product_in_existing_products() -> None:
     """Тестирование на создание нового продукта, c проверкой и изменением в списке созданных"""

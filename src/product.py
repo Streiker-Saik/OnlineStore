@@ -4,11 +4,13 @@ from typing import Any, Dict, List, Optional
 class Product:
     """
     Класс для предоставления продукта
+
     Атрибуты:
         name(str): Название продукта
         description(str): Описание продукта
         price(float): Цена продукта (private)
         quantity(int): Количество продукта
+
     Методы:
         __init__(self, name: str, description: str, price: float, quantity: int) -> None:
             Инициализирует экземпляр класса Product с заданными атрибутам
@@ -56,9 +58,9 @@ class Product:
             existing_products = []
 
         for existing_product in existing_products:
-            if existing_product.name == product.get("name", ""):
+            if existing_product.name == product.get("name"):
                 existing_product.quantity += product.get("quantity", 0)
-                existing_product.price = max(existing_product.price, product.get("price", 0.0))
+                existing_product.price = max(existing_product.price, product.get("price", existing_product.price))
                 return existing_product
         new_product = cls(
             name=product.get("name", ""),
@@ -88,7 +90,7 @@ class Product:
         if new_price <= 0:
             print("Цена не должна быть нулевая или отрицательная")
             return
-        elif self.price > new_price:
+        elif self.__price > new_price:
             user_out = input("Понизить цену? введите Y/N (yes/no): ")
             if user_out.lower() in ("y", "yes"):
                 self.__price = new_price

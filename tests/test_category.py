@@ -1,5 +1,8 @@
+import pytest
+
 from src.category import Category
 from src.product import Product
+from typing import Any
 
 
 def test_init_category(first_category: Category) -> None:
@@ -17,6 +20,14 @@ def test_category_product_setter(first_category: Category) -> None:
     assert len(first_category.get_products) == 2
     first_category.add_product(Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14))
     assert len(first_category.get_products) == 3
+
+
+def test_category_product_setter_error(first_category: Category) -> None:
+    """Тестирование добавление экземпляра в список продуктов не класс Product"""
+    with pytest.raises(TypeError) as exc_info:
+        error_category: Any = "Xiaomi Redmi Note 11"
+        first_category.add_product(error_category)
+    assert "Не является классом Product" in str(exc_info)
 
 
 def test_category_products_list_property(first_category: Category) -> None:

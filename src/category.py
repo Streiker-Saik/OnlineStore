@@ -20,7 +20,7 @@ class Category:
         get_products(self) -> List[Product]:
             Getter: возвращает список продуктов в категории
         add_product(self, product: Product) -> None:
-            Метод: добавляет в категорию продукт и обновляет счетчик
+            Метод: добавляет в категорию продукт и обновляет счетчик, если его нет в списке
         products(self) -> str:
             Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
             <name>, <price> руб. Остаток: <quantity> шт.
@@ -46,7 +46,7 @@ class Category:
         self.description = description
         self.__products = products if products else []
         Category.category_count += 1
-        Category.product_count = len(self.__products) if self.__products else 0
+        Category.product_count += len(self.__products)
 
     @property
     def get_products(self) -> List[Product]:
@@ -58,11 +58,17 @@ class Category:
 
     def add_product(self, product: Product) -> None:
         """
-        Метод добавляет в категорию продукт и обновляет счетчик
+        Метод добавляет в категорию продукт и обновляет счетчик, если его нет в списке
         :param product: Продукт который нужно добавить
+        :raises TypeError: Если переданный аргумент не является экземпляром класса Product.
         """
-        self.__products.append(product)
-        Category.product_count += 1
+        if not isinstance(product, Product):
+            raise TypeError("Не является классом Product")
+
+        if product not in self.__products:
+            self.__products.append(product)
+            Category.product_count += 1
+
 
     @property
     def products(self) -> str:
