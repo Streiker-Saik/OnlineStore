@@ -48,6 +48,15 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(self.__products)
 
+    def __str__(self) -> str:
+        """
+        Магический метод, строковое отображение класса.
+        :return: Строка отображения класса. Формат:
+        <name>, количество продуктов: <sum(product.quantity)> шт.
+        """
+        total_quantity = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
     @property
     def get_products(self) -> List[Product]:
         """
@@ -69,7 +78,6 @@ class Category:
             self.__products.append(product)
             Category.product_count += 1
 
-
     @property
     def products(self) -> str:
         """
@@ -79,5 +87,5 @@ class Category:
         """
         products_str = ""
         for product in self.__products:
-            products_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            products_str += f"{str(product)}\n"
         return products_str.strip()

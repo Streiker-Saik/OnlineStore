@@ -43,49 +43,78 @@ poetry add --group dev pytest pytest-cov
 ## Модуль src.product.py
 class Product:
 ```
+Класс для предоставления продукта
+
 Атрибуты:
-        name(str): Название продукта
-        description(str): Описание продукта
-        price(float): Цена продукта (private)
-        quantity(int): Количество продукта
+    name(str): Название продукта
+    description(str): Описание продукта
+    price(float): Цена продукта (private)
+    quantity(int): Количество продукта
+
 Методы:
-        __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-            Инициализирует экземпляр класса Product с заданными атрибутам
-        new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
-            Создает новый экземпляр класса Product на основе данных из словаря.
-            Если такой продукт с name существует в списке, обновляет количество и цену
-        price(self) -> float:
-            Getter: возвращает значение цены
-        price(self, new_price: float) -> None:
-            Setter: заменяет значение цены. 
-            При меньше или равное 0 выводит сообщение предупреждения. 
-            При уменьшении цены запрашивает у пользователя подтверждение
+    __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        Инициализирует экземпляр класса Product с заданными атрибутам
+    __str__(self) -> str:
+        Возвращает строковое отображение класса Product. 
+            Формат: <name>, <price> руб. Остаток: <quantity> шт.
+    __add__(self, other: 'Product') -> float:
+        Возвращает общую стоимость товаров, как сумма стоимости товаров умноженная на их количество
+        TypeError: Если переданный аргумент не является экземпляром класса Product.
+    new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
+        Создает новый экземпляр класса Product на основе данных из словаря.
+        Если такой продукт с name существует в списке, обновляет количество и цену
+    price(self) -> float:
+        Getter: возвращает значение цены
+    price(self, new_price: float) -> None:
+        Setter: заменяет значение цены. 
+        При меньше или равное 0 выводит сообщение предупреждения. 
+        При уменьшении цены запрашивает у пользователя подтверждение
 ```
 
 ## Модуль src.category.py
 class Category:
 ```
+Класс категорий продукта
+
 Атрибуты:
     name(str): Название категории
     description(str): Описание категории
     products(list): Список продукта (private)
     category_count(int): Общее количество созданных категорий
-    product_count(int): Общее количество созданных продукта
-Методы:
-        __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
-            Инициализирует экземпляр класса Category с заданными атрибутам
-        get_products(self) -> List[Product]:
-            Getter: возвращает список продуктов в категории
-        add_product(self, product: Product) -> None:
-            Метод: добавляет в категорию продукт и обновляет счетчик, если его не было в списке
-            TypeError: Если переданный аргумент не является экземпляром класса Product.
-        products(self) -> str:
-            Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
-            <name>, <price> руб. Остаток: <quantity> шт.
-```
-Увеличивает счетчик категорий(category_count) при создании нового экземпляра 
-и устанавливает количество продуктов(product_count) в данной категории.
+    product_count(int): Общее количество созданных продукта во всех категориях
 
+Методы:
+    __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
+        Инициализирует экземпляр класса Category с заданными атрибутам
+    __str__(self) -> str:
+        возвращает строковое отображение класса Category. 
+            Формат: <name>, количество продуктов: <sum(product.quantity)> шт.
+    get_products(self) -> List[Product]:
+        Getter: возвращает список продуктов в категории
+    add_product(self, product: Product) -> None:
+        Метод: добавляет в категорию продукт и обновляет счетчик, если его не было в списке
+        TypeError: Если переданный аргумент не является экземпляром класса Product.
+    products(self) -> str:
+        Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
+        <name>, <price> руб. Остаток: <quantity> шт.\n
+```
+
+## Модуль src.products_iterator.py
+class ProductIterator:
+```
+Итератор класса Category, позволяющий перебирать продукты в категории
+
+Атрибуты:
+    category_obj(Category) - объект класса Category
+
+Методы:
+    __init__(self, category_obj: Category) -> None:
+        Инициализирует объект класса Category
+    __iter__(self) -> Iterator:
+        Возвращает сам итератор
+    __next__(self) -> Product:
+        Возвращает следующий продукт в категории
+```
 ## Модуль src.utils.py
 reader_json
 - принимает путь к json файлу

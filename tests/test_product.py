@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -66,3 +66,22 @@ def test_product_correct(mock_input: MagicMock, first_product: Product) -> None:
     mock_input.return_value = "y"
     first_product.price = 120000.0
     assert first_product.price == 120000.0
+
+
+def test_product_str(first_product: Product) -> None:
+    """Тестирование строкового отображения класса"""
+    assert str(first_product) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
+
+
+def test_product_add(first_product: Product, second_product: Product) -> None:
+    """Тестирование операции сложения двух продуктов"""
+    sum_product = first_product + second_product
+    assert sum_product == 2580000.0
+
+
+def test_product_add_error(first_product: Product) -> None:
+    """Тестирование операции сложения двух продуктов, если добавленный не класс Product"""
+    with pytest.raises(TypeError) as exc_info:
+        error_category: Any = "Any"
+        first_product + error_category
+    assert "Не является классом Product" in str(exc_info)
