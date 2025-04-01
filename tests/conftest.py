@@ -5,6 +5,8 @@ import pytest
 from src.category import Category
 from src.product import Product
 from src.products_iterator import ProductsIterator
+from src.smartphone import Smartphone
+from src.lawngrass import LawnGrass
 
 
 @pytest.fixture
@@ -87,3 +89,30 @@ def products_list() -> List[Dict[str, Any]]:
             ],
         },
     ]
+
+
+@pytest.fixture
+def first_smartphone() -> Smartphone:
+    return Smartphone(
+        name="Samsung Galaxy C23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180000.0,
+        quantity=5,
+        efficiency=95.5,
+        model="S23 Ultra",
+        memory=256,
+        color="Серый"
+    )
+
+
+@pytest.fixture
+def first_grass() -> LawnGrass:
+    return LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава для газона",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый"
+    )

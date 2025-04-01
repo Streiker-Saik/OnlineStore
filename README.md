@@ -71,6 +71,39 @@ class Product:
         При уменьшении цены запрашивает у пользователя подтверждение
 ```
 
+## Модуль src.smartphone.py
+class Smartphone(Product):
+```
+Класс, представления "Смартфон"
+
+Атрибуты:
+    efficiency(float): Производительность
+    model(str): Модель
+    memory(int): Объем встроенной памяти
+    color(str): Цвет
+    
+Методы:
+    __init__(self, name: str, description: str, price: float, quantity: int,
+        efficiency: float, model: str, memory: int, color: str) -> None:
+        Инициализирует экземпляр, наследуемого от Product класса Smartphone, с заданными атрибутам
+```
+
+## Модуль src.lawngrass.py
+class LawnGrass(Product):
+```
+Класс, представления "Трава газонная"
+    
+Атрибуты:
+    country(str): Страна-производитель
+    germination_period(str): Срок прорастания
+    color(str): Цвет
+    
+Методы:
+    __init__(self, name: str, description: str, price: float, quantity: int,
+        country: str, germination_period: str, color: str) -> None:
+        Инициализирует экземпляр, наследуемого от Product класса LawnGrass, с заданными атрибутам
+```
+
 ## Модуль src.category.py
 class Category:
 ```
