@@ -3,10 +3,10 @@ from typing import Any, Dict, List
 import pytest
 
 from src.category import Category
+from src.lawngrass import LawnGrass
 from src.product import Product
 from src.products_iterator import ProductsIterator
 from src.smartphone import Smartphone
-from src.lawngrass import LawnGrass
 
 
 @pytest.fixture
@@ -101,7 +101,21 @@ def first_smartphone() -> Smartphone:
         efficiency=95.5,
         model="S23 Ultra",
         memory=256,
-        color="Серый"
+        color="Серый",
+    )
+
+
+@pytest.fixture
+def second_smartphone() -> Smartphone:
+    return Smartphone(
+        name="Iphone 15",
+        description="512GB, Gray space",
+        price=210000.0,
+        quantity=8,
+        efficiency=98.2,
+        model="15",
+        memory=512,
+        color="Gray space",
     )
 
 
@@ -114,5 +128,18 @@ def first_grass() -> LawnGrass:
         quantity=20,
         country="Россия",
         germination_period="7 дней",
-        color="Зеленый"
+        color="Зеленый",
+    )
+
+
+@pytest.fixture
+def second_grass() -> LawnGrass:
+    return LawnGrass(
+        name="Газонная трава 2",
+        description="Выносливая трава",
+        price=450.0,
+        quantity=15,
+        country="США",
+        germination_period="5 дней",
+        color="Темно-зеленый",
     )

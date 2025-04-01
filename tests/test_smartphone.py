@@ -1,3 +1,6 @@
+import pytest
+
+from src.lawngrass import LawnGrass
 from src.smartphone import Smartphone
 
 
@@ -11,3 +14,16 @@ def test_smartphone_init(first_smartphone: Smartphone) -> None:
     assert first_smartphone.model == "S23 Ultra"
     assert first_smartphone.memory == 256
     assert first_smartphone.color == "Серый"
+
+
+def test_smartphone_add(first_smartphone: Smartphone, second_smartphone: Smartphone) -> None:
+    """Тестирование операции сложения двух смартфонов"""
+    sum_smartphone = first_smartphone + second_smartphone
+    assert sum_smartphone == 2580000.0
+
+
+def test_smartphone_add_error(first_smartphone: Smartphone, first_grass: LawnGrass) -> None:
+    """Тестирование операции сложения двух продуктов 'Смартфон', если добавленный не класс Smartphone"""
+    with pytest.raises(TypeError) as exc_info:
+        first_smartphone + first_grass
+    assert "Переданный аргумент, не является классом Smartphone" in str(exc_info)

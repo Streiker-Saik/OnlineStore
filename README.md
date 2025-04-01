@@ -86,6 +86,9 @@ class Smartphone(Product):
     __init__(self, name: str, description: str, price: float, quantity: int,
         efficiency: float, model: str, memory: int, color: str) -> None:
         Инициализирует экземпляр, наследуемого от Product класса Smartphone, с заданными атрибутам
+    __add__(self, other: "Product") -> float:
+        Суммирование двух 'смартфонов' общей стоимости
+        TypeError: Если переданный аргумент не является экземпляром класса Smartphone.
 ```
 
 ## Модуль src.lawngrass.py
@@ -102,6 +105,9 @@ class LawnGrass(Product):
     __init__(self, name: str, description: str, price: float, quantity: int,
         country: str, germination_period: str, color: str) -> None:
         Инициализирует экземпляр, наследуемого от Product класса LawnGrass, с заданными атрибутам
+    __add__(self, other: "Product") -> float:
+        Суммирование двух 'травы газонной' общей стоимости
+        TypeError: Если переданный аргумент не является экземпляром класса LawnGrass.
 ```
 
 ## Модуль src.category.py

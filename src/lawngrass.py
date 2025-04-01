@@ -15,19 +15,20 @@ class LawnGrass(Product):
             country: str, germination_period: str, color: str) -> None:
             Инициализирует экземпляр, наследуемого от Product класса LawnGrass, с заданными атрибутам
     """
+
     country: str
     germination_period: str
     color: str
 
     def __init__(
-            self,
-            name: str,
-            description: str,
-            price: float,
-            quantity: int,
-            country: str,
-            germination_period: str,
-            color: str
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: str,
+        color: str,
     ) -> None:
         """
         Метод для инициализации экземпляра травы газонной
@@ -43,3 +44,14 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
+    def __add__(self, other: "Product") -> float:
+        """
+        Суммирование двух 'травы газонной' общей стоимости
+        :param other: экземпляр класса LawnGrass, который будет добавлен
+        :return: общая стоимость 'травы газонной', как сумма стоимости 'травы газонной' умноженная на их количество
+        :raises TypeError: Если переданный аргумент не является экземпляром класса LawnGrass.
+        """
+        if type(other) is not LawnGrass:
+            raise TypeError("Переданный аргумент, не является классом LawnGrass")
+        return self.price * self.quantity + other.price * other.quantity
