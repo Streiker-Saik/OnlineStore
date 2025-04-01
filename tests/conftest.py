@@ -3,10 +3,10 @@ from typing import Any, Dict, List
 import pytest
 
 from src.category import Category
-from src.lawngrass import LawnGrass
 from src.product import Product
+from src.product_lawngrass import LawnGrass
+from src.product_smartphone import Smartphone
 from src.products_iterator import ProductsIterator
-from src.smartphone import Smartphone
 
 
 @pytest.fixture

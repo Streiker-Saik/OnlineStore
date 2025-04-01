@@ -1,6 +1,6 @@
 from src.category import Category
-from src.lawngrass import LawnGrass
-from src.smartphone import Smartphone
+from src.product_lawngrass import LawnGrass
+from src.product_smartphone import Smartphone
 
 if __name__ == "__main__":
     smartphone1 = Smartphone(
