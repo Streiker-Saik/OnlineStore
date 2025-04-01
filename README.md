@@ -71,7 +71,7 @@ class Product:
         При уменьшении цены запрашивает у пользователя подтверждение
 ```
 
-## Модуль src.smartphone.py
+## Модуль src.product_smartphone.py
 class Smartphone(Product):
 ```
 Класс, представления "Смартфон"
@@ -91,7 +91,7 @@ class Smartphone(Product):
         TypeError: Если переданный аргумент не является экземпляром класса Smartphone.
 ```
 
-## Модуль src.lawngrass.py
+## Модуль src.product_lawngrass.py
 class LawnGrass(Product):
 ```
 Класс, представления "Трава газонная"
