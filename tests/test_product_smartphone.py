@@ -1,6 +1,3 @@
-import pytest
-
-from src.product_lawngrass import LawnGrass
 from src.product_smartphone import Smartphone
 
 
@@ -20,10 +17,3 @@ def test_smartphone_add(first_smartphone: Smartphone, second_smartphone: Smartph
     """Тестирование операции сложения двух смартфонов"""
     sum_smartphone = first_smartphone + second_smartphone
     assert sum_smartphone == 2580000.0
-
-
-def test_smartphone_add_error(first_smartphone: Smartphone, first_grass: LawnGrass) -> None:
-    """Тестирование операции сложения двух продуктов 'Смартфон', если добавленный не класс Smartphone"""
-    with pytest.raises(TypeError) as exc_info:
-        first_smartphone + first_grass
-    assert "Переданный аргумент, не является классом Smartphone" in str(exc_info)

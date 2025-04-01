@@ -44,14 +44,3 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
-
-    def __add__(self, other: "Product") -> float:
-        """
-        Суммирование двух 'травы газонной' общей стоимости
-        :param other: экземпляр класса LawnGrass, который будет добавлен
-        :return: общая стоимость 'травы газонной', как сумма стоимости 'травы газонной' умноженная на их количество
-        :raises TypeError: Если переданный аргумент не является экземпляром класса LawnGrass.
-        """
-        if type(other) is not LawnGrass:
-            raise TypeError("Переданный аргумент, не является классом LawnGrass")
-        return self.price * self.quantity + other.price * other.quantity

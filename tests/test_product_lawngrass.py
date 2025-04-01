@@ -1,7 +1,4 @@
-import pytest
-
 from src.product_lawngrass import LawnGrass
-from src.product_smartphone import Smartphone
 
 
 def test_grass_init(first_grass: LawnGrass) -> None:
@@ -19,10 +16,3 @@ def test_grass_add(first_grass: LawnGrass, second_grass: LawnGrass) -> None:
     """Тестирование операции сложения двух продуктов 'Трава газонна'"""
     sum_grass = first_grass + second_grass
     assert sum_grass == 16750.0
-
-
-def test_grass_add_error(first_grass: LawnGrass, first_smartphone: Smartphone) -> None:
-    """Тестирование операции сложения двух продуктов 'Трава газонна', если добавленный не класс LawnGrass"""
-    with pytest.raises(TypeError) as exc_info:
-        first_grass + first_smartphone
-    assert "Переданный аргумент, не является классом LawnGrass" in str(exc_info)

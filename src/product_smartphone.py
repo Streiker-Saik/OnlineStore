@@ -49,14 +49,3 @@ class Smartphone(Product):
         self.model = model
         self.memory = memory
         self.color = color
-
-    def __add__(self, other: "Product") -> float:
-        """
-        Суммирование двух 'смартфонов' общей стоимости
-        :param other: экземпляр класса Smartphone, который будет добавлен
-        :return: общая стоимость 'смартфонов', как сумма стоимости 'смартфонов' умноженная на их количество
-        :raises TypeError: Если переданный аргумент не является экземпляром класса Smartphone.
-        """
-        if type(other) is not Smartphone:
-            raise TypeError("Переданный аргумент, не является классом Smartphone")
-        return self.price * self.quantity + other.price * other.quantity

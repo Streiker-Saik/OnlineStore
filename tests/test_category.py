@@ -28,7 +28,7 @@ def test_category_product_setter_error(first_category: Category) -> None:
     with pytest.raises(TypeError) as exc_info:
         error_category: Any = "Xiaomi Redmi Note 11"
         first_category.add_product(error_category)
-    assert "Не является классом Product" in str(exc_info)
+    assert "Не является классом Product или подклассом" in str(exc_info)
 
 
 def test_category_products_list_property(first_category: Category) -> None:

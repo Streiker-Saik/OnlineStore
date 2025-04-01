@@ -56,10 +56,10 @@ class Product:
         Суммирование двух продуктов общей стоимости товаров
         :param other: экземпляр класса Product, который будет добавлен
         :return: общая стоимость товаров, как сумма стоимости товаров умноженная на их количество
-        :raises TypeError: Если переданный аргумент не является экземпляром класса Product.
+        :raises TypeError: Если переданный аргумент не является тем же классы/подклассы.
         """
-        if not isinstance(other, Product):
-            raise TypeError("Не является классом Product")
+        if type(other) is not self.__class__:
+            raise TypeError("Не возможно сложить разные классы/подклассы")
         return self.__price * self.quantity + other.__price * other.quantity
 
     @classmethod
