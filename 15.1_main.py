@@ -1,6 +1,6 @@
 from src.category import Category
 from src.product import Product
-from  src.products_iterator import ProductIterator
+from  src.products_iterator import ProductsIterator
 
 if __name__ == '__main__':
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     print(product2 + product3)
 
     print()
-    iterator = ProductIterator(category1)
+    iterator = ProductsIterator(category1)
 
     for product in iterator:
         print(product)

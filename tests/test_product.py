@@ -4,6 +4,8 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from src.product import Product
+from src.product_lawngrass import LawnGrass
+from src.product_smartphone import Smartphone
 
 
 def test_init_product(first_product: Product) -> None:
@@ -84,4 +86,11 @@ def test_product_add_error(first_product: Product) -> None:
     with pytest.raises(TypeError) as exc_info:
         error_category: Any = "Any"
         first_product + error_category
-    assert "Не является классом Product" in str(exc_info)
+    assert "Не возможно сложить разные классы/подклассы" in str(exc_info)
+
+
+def test_smartphone_add_error(first_smartphone: Smartphone, first_grass: LawnGrass) -> None:
+    """Тестирование операции сложения двух подклассов 'Смартфон', если добавленный не класс Smartphone"""
+    with pytest.raises(TypeError) as exc_info:
+        first_smartphone + first_grass
+    assert "Не возможно сложить разные классы/подклассы" in str(exc_info)

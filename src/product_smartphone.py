@@ -1,0 +1,51 @@
+from src.product import Product
+
+
+class Smartphone(Product):
+    """
+    Класс, представления "Смартфон"
+
+    Атрибуты:
+        efficiency(float): Производительность
+        model(str): Модель
+        memory(int): Объем встроенной памяти
+        color(str): Цвет
+
+    Методы:
+        __init__(self, name: str, description: str, price: float, quantity: int,
+            efficiency: float, model: str, memory: int, color: str) -> None:
+            Инициализирует экземпляр, наследуемого от Product класса Smartphone, с заданными атрибутам
+    """
+
+    efficiency: float
+    model: str
+    memory: int
+    color: str
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: float,
+        model: str,
+        memory: int,
+        color: str,
+    ) -> None:
+        """
+        Метод для инициализации экземпляра смартфона
+        :param name: Название
+        :param description: Описание
+        :param price: Цена
+        :param quantity: Количество
+        :param efficiency: Производительность
+        :param model: Модель
+        :param memory: Объем встроенной памяти
+        :param color: Цвет
+        """
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color

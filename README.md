@@ -59,7 +59,7 @@ class Product:
             Формат: <name>, <price> руб. Остаток: <quantity> шт.
     __add__(self, other: 'Product') -> float:
         Возвращает общую стоимость товаров, как сумма стоимости товаров умноженная на их количество
-        TypeError: Если переданный аргумент не является экземпляром класса Product.
+        TypeError: Если переданный аргумент не является тем же классоом/подклассом.
     new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
         Создает новый экземпляр класса Product на основе данных из словаря.
         Если такой продукт с name существует в списке, обновляет количество и цену
@@ -69,6 +69,39 @@ class Product:
         Setter: заменяет значение цены. 
         При меньше или равное 0 выводит сообщение предупреждения. 
         При уменьшении цены запрашивает у пользователя подтверждение
+```
+
+## Модуль src.product_smartphone.py
+class Smartphone(Product):
+```
+Класс, представления "Смартфон"
+
+Атрибуты:
+    efficiency(float): Производительность
+    model(str): Модель
+    memory(int): Объем встроенной памяти
+    color(str): Цвет
+    
+Методы:
+    __init__(self, name: str, description: str, price: float, quantity: int,
+        efficiency: float, model: str, memory: int, color: str) -> None:
+        Инициализирует экземпляр, наследуемого от Product класса Smartphone, с заданными атрибутам
+```
+
+## Модуль src.product_lawngrass.py
+class LawnGrass(Product):
+```
+Класс, представления "Трава газонная"
+    
+Атрибуты:
+    country(str): Страна-производитель
+    germination_period(str): Срок прорастания
+    color(str): Цвет
+    
+Методы:
+    __init__(self, name: str, description: str, price: float, quantity: int,
+        country: str, germination_period: str, color: str) -> None:
+        Инициализирует экземпляр, наследуемого от Product класса LawnGrass, с заданными атрибутам
 ```
 
 ## Модуль src.category.py

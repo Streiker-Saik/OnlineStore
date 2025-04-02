@@ -4,6 +4,8 @@ import pytest
 
 from src.category import Category
 from src.product import Product
+from src.product_lawngrass import LawnGrass
+from src.product_smartphone import Smartphone
 from src.products_iterator import ProductsIterator
 
 
@@ -87,3 +89,57 @@ def products_list() -> List[Dict[str, Any]]:
             ],
         },
     ]
+
+
+@pytest.fixture
+def first_smartphone() -> Smartphone:
+    return Smartphone(
+        name="Samsung Galaxy C23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180000.0,
+        quantity=5,
+        efficiency=95.5,
+        model="S23 Ultra",
+        memory=256,
+        color="Серый",
+    )
+
+
+@pytest.fixture
+def second_smartphone() -> Smartphone:
+    return Smartphone(
+        name="Iphone 15",
+        description="512GB, Gray space",
+        price=210000.0,
+        quantity=8,
+        efficiency=98.2,
+        model="15",
+        memory=512,
+        color="Gray space",
+    )
+
+
+@pytest.fixture
+def first_grass() -> LawnGrass:
+    return LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава для газона",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый",
+    )
+
+
+@pytest.fixture
+def second_grass() -> LawnGrass:
+    return LawnGrass(
+        name="Газонная трава 2",
+        description="Выносливая трава",
+        price=450.0,
+        quantity=15,
+        country="США",
+        germination_period="5 дней",
+        color="Темно-зеленый",
+    )

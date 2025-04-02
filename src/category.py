@@ -69,10 +69,10 @@ class Category:
         """
         Метод добавляет в категорию продукт и обновляет счетчик, если его нет в списке
         :param product: Продукт который нужно добавить
-        :raises TypeError: Если переданный аргумент не является экземпляром класса Product.
+        :raises TypeError: Если переданный аргумент не является экземпляром класса Product или подклассом.
         """
         if not isinstance(product, Product):
-            raise TypeError("Не является классом Product")
+            raise TypeError("Не является классом Product или подклассом")
 
         if product not in self.__products:
             self.__products.append(product)
