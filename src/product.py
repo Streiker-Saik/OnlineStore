@@ -1,7 +1,17 @@
+from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 
 
-class Product:
+class BaseProduct(ABC):
+    """Абстрактный класс продуктов"""
+
+    @abstractmethod
+    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        """Инициализация продукта"""
+        pass
+
+
+class Product(BaseProduct):
     """
     Класс для предоставления продукта
 

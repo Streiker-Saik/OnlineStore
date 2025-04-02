@@ -41,7 +41,13 @@ poetry add --group dev pytest pytest-cov
 # Примеры работы функций:
 
 ## Модуль src.product.py
-class Product:
+class BaseProduct:
+```
+Абстрактный класс продуктов
+    __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        Инициализация продукта (name, description, price, quantity)
+```
+class Product(BaseProduct):
 ```
 Класс для предоставления продукта
 
