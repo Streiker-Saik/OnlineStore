@@ -47,7 +47,14 @@ class BaseProduct:
     __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         Инициализация продукта (name, description, price, quantity)
 ```
-class Product(BaseProduct):
+class PrintMixin:
+```
+Класс-миксин, печати в консоль
+    __repr__(self) -> str:
+        Строка класса с параметрами
+            Формат: "<class_name>(<name>, <description>, <price>, <quantity>)"
+```
+class Product(BaseProduct, PrintMixin):
 ```
 Класс для предоставления продукта
 

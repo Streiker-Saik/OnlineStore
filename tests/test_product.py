@@ -55,7 +55,7 @@ def test_product_update(capsys: pytest.CaptureFixture, first_product: Product) -
     """Тестирование на ввод корректной цены больше 0"""
     first_product.price = -100.5
     message = capsys.readouterr()
-    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+    assert message.out.strip().split("\n")[-1] == "Цена не должна быть нулевая или отрицательная"
 
 
 @patch("builtins.input")
@@ -94,3 +94,10 @@ def test_smartphone_add_error(first_smartphone: Smartphone, first_grass: LawnGra
     with pytest.raises(TypeError) as exc_info:
         first_smartphone + first_grass
     assert "Не возможно сложить разные классы/подклассы" in str(exc_info)
+
+
+def test_print_mixin(capsys) -> None:
+    """"""
+    Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    message = capsys.readouterr()
+    assert message.out.strip() == "Product('Samsung Galaxy C23 Ultra', '256GB, Серый цвет, 200MP камера', 180000.0, 5)"

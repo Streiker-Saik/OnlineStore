@@ -6,12 +6,24 @@ class BaseProduct(ABC):
     """Абстрактный класс продуктов"""
 
     @abstractmethod
-    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+    def __init__(self) -> None:
         """Инициализация продукта"""
         pass
 
 
-class Product(BaseProduct):
+class PrintMixin:
+    """Класс-миксин, печати в консоль"""
+
+    def __repr__(self) -> str:
+        """
+        Магический метод, вывода в консоль класса с параметрами
+        :return: Строка класса с параметрами
+            Формат: <class_name>(<name>, <description>, <price>, <quantity>)
+        """
+        return f"{self.__class__.__name__}({self.name!r}, {self.description!r}, {self.price!r}, {self.quantity!r})"
+
+
+class Product(BaseProduct, PrintMixin):
     """
     Класс для предоставления продукта
 
@@ -34,7 +46,6 @@ class Product(BaseProduct):
             При меньше или равное 0 выводит сообщение предупреждения.
             При уменьшении цены запрашивает у пользователя подтверждение
     """
-
     name: str
     description: str
     __price: float
@@ -48,10 +59,13 @@ class Product(BaseProduct):
         :param price: Цена продукта
         :param quantity: Количество продукта
         """
+        super().__init__()
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+        print(repr(self))
+
 
     def __str__(self) -> str:
         """
