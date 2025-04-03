@@ -1,26 +1,7 @@
-from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 
-
-class BaseProduct(ABC):
-    """Абстрактный класс продуктов"""
-
-    @abstractmethod
-    def __init__(self) -> None:
-        """Инициализация продукта"""
-        pass
-
-
-class PrintMixin:
-    """Класс-миксин, печати в консоль"""
-
-    def __repr__(self) -> str:
-        """
-        Магический метод, вывода в консоль класса с параметрами
-        :return: Строка класса с параметрами
-            Формат: <class_name>(<name>, <description>, <price>, <quantity>)
-        """
-        return f"{self.__class__.__name__}({self.name!r}, {self.description!r}, {self.price!r}, {self.quantity!r})"
+from src.interfaces import BaseProduct
+from src.mixins import PrintMixin
 
 
 class Product(BaseProduct, PrintMixin):
@@ -46,6 +27,7 @@ class Product(BaseProduct, PrintMixin):
             При меньше или равное 0 выводит сообщение предупреждения.
             При уменьшении цены запрашивает у пользователя подтверждение
     """
+
     name: str
     description: str
     __price: float
@@ -59,13 +41,11 @@ class Product(BaseProduct, PrintMixin):
         :param price: Цена продукта
         :param quantity: Количество продукта
         """
-        super().__init__()
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
         print(repr(self))
-
 
     def __str__(self) -> str:
         """
@@ -105,12 +85,13 @@ class Product(BaseProduct, PrintMixin):
                 existing_product.quantity += product.get("quantity", 0)
                 existing_product.price = max(existing_product.price, product.get("price", existing_product.price))
                 return existing_product
-        new_product = cls(
-            name=product.get("name", ""),
-            description=product.get("description", ""),
-            price=product.get("price", 0.0),
-            quantity=product.get("quantity", 0),
-        )
+        # new_product = cls(
+        #     name=product.get("name", ""),
+        #     description=product.get("description", ""),
+        #     price=product.get("price", 0.0),
+        #     quantity=product.get("quantity", 0),
+        # )
+        new_product = cls(**product)
         existing_products.append(new_product)
         return new_product
 

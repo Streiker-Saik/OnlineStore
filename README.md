@@ -40,20 +40,29 @@ poetry add --group dev pytest pytest-cov
 
 # Примеры работы функций:
 
-## Модуль src.product.py
+## Модуль src.interfaces.py
 class BaseProduct:
 ```
 Абстрактный класс продуктов
     __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         Инициализация продукта (name, description, price, quantity)
 ```
+class BaseProduct:
+```
+Абстрактный класс сущностей
+
+```
+
+## Модуль src.mixins.py
 class PrintMixin:
 ```
 Класс-миксин, печати в консоль
     __repr__(self) -> str:
         Строка класса с параметрами
-            Формат: "<class_name>(<name>, <description>, <price>, <quantity>)"
+            Формат: "<class_name>(<attribute1>, ...)"
 ```
+
+## Модуль src.product.py
 class Product(BaseProduct, PrintMixin):
 ```
 Класс для предоставления продукта
