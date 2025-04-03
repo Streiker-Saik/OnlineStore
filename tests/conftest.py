@@ -3,6 +3,7 @@ from typing import Any, Dict, List
 import pytest
 
 from src.category import Category
+from src.order import Order
 from src.product import Product
 from src.product_lawngrass import LawnGrass
 from src.product_smartphone import Smartphone
@@ -143,3 +144,8 @@ def second_grass() -> LawnGrass:
         germination_period="5 дней",
         color="Темно-зеленый",
     )
+
+
+@pytest.fixture
+def test_order(first_product: Product) -> Order:
+    return Order(first_product, 2)

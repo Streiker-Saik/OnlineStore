@@ -50,7 +50,10 @@ class BaseProduct:
 class BaseProduct:
 ```
 Абстрактный класс сущностей
-
+    __init__(self) -> None:
+        Инициализация сущности
+    __str__(self) -> str:
+        Строковое отображение класса
 ```
 
 ## Модуль src.mixins.py
@@ -127,7 +130,7 @@ class LawnGrass(Product):
 ```
 
 ## Модуль src.category.py
-class Category:
+class Category(BaseEntity):
 ```
 Класс категорий продукта
 
@@ -142,8 +145,8 @@ class Category:
     __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
         Инициализирует экземпляр класса Category с заданными атрибутам
     __str__(self) -> str:
-        возвращает строковое отображение класса Category. 
-            Формат: <name>, количество продуктов: <sum(product.quantity)> шт.
+        Возвращает строковое отображение класса Category. 
+        Формат: <name>, количество продуктов: <sum(product.quantity)> шт.
     get_products(self) -> List[Product]:
         Getter: возвращает список продуктов в категории
     add_product(self, product: Product) -> None:
@@ -152,6 +155,28 @@ class Category:
     products(self) -> str:
         Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
         <name>, <price> руб. Остаток: <quantity> шт.\n
+```
+
+## Модуль src.order.py
+class Order(BaseEntity):
+```
+Класс категорий продукта
+
+Атрибуты:
+    product(Product): Продукт, который был куплен
+    quantity(int): Количество купленного продукта
+    over_price(float): Общая стоимость
+
+Методы:
+    __init__(self, product: Product, quantity: int) -> None:
+        Инициализации экземпляра заказа
+    __str__(self) -> str:
+        Возвращает строковое отображение класса. Формат:
+        <product.name>, <quantity> шт: <total_price> руб
+    update_quantity(self, new_quantity: int) -> None:
+        Метод: обновление количество в заказе
+        TypeError: Если переданный аргумент не является целым числом
+        ValueError: Если переданный аргумент отрицательный
 ```
 
 ## Модуль src.products_iterator.py

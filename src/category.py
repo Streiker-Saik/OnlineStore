@@ -1,9 +1,10 @@
 from typing import List, Optional
 
+from src.interfaces import BaseEntity
 from src.product import Product
 
 
-class Category:
+class Category(BaseEntity):
     """
     Класс категорий продукта
 
@@ -17,6 +18,9 @@ class Category:
     Методы:
         __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
             Инициализирует экземпляр класса Category с заданными атрибутам
+        __str__(self) -> str:
+            Магический метод, возвращает строковое отображение класса Category.
+            Формат: <name>, количество продуктов: <sum(product.quantity)> шт.
         get_products(self) -> List[Product]:
             Getter: возвращает список продуктов в категории
         add_product(self, product: Product) -> None:
