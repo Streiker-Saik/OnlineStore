@@ -44,14 +44,12 @@ poetry add --group dev pytest pytest-cov
 class BaseProduct:
 ```
 Абстрактный класс продуктов
-    __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-        Инициализация продукта (name, description, price, quantity)
+    def new_product(cls, product_date: Dict[str, Any]) -> "BaseProduct":
+        Классовый метод преобразования из словаря в объект класса
 ```
 class BaseProduct:
 ```
 Абстрактный класс сущностей
-    __init__(self) -> None:
-        Инициализация сущности
     __str__(self) -> str:
         Строковое отображение класса
 ```
@@ -60,6 +58,8 @@ class BaseProduct:
 class PrintMixin:
 ```
 Класс-миксин, печати в консоль
+    __init__(self) -> None:
+        Инициализация экземпляра класса с выводом в терминал
     __repr__(self) -> str:
         Строка класса с параметрами
             Формат: "<class_name>(<attribute1>, ...)"
@@ -195,6 +195,7 @@ class ProductIterator:
     __next__(self) -> Product:
         Возвращает следующий продукт в категории
 ```
+
 ## Модуль src.utils.py
 reader_json
 - принимает путь к json файлу

@@ -30,7 +30,7 @@ def test_new_product_in_existing_products() -> None:
     """Тестирование на создание нового продукта, c проверкой и изменением в списке созданных"""
     product_one = {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14}
     product_two = {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 45000.0, "quantity": 6}
-    product_free = {"name": "Iphone 15", "description": "512GB, Gray space", "price": 210000.0, "quantity": 8}
+    product_three = {"name": "Iphone 15", "description": "512GB, Gray space", "price": 210000.0, "quantity": 8}
     existing_products: List = []
 
     product = Product.new_product(product_one, existing_products)
@@ -45,7 +45,7 @@ def test_new_product_in_existing_products() -> None:
     assert product.quantity == 20
     assert len(existing_products) == 1
 
-    product = Product.new_product(product_free, existing_products)
+    product = Product.new_product(product_three, existing_products)
     assert product.price == 210000.0
     assert product.quantity == 8
     assert len(existing_products) == 2

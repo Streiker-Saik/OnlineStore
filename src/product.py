@@ -45,7 +45,7 @@ class Product(BaseProduct, PrintMixin):
         self.description = description
         self.__price = price
         self.quantity = quantity
-        print(repr(self))
+        super().__init__()
 
     def __str__(self) -> str:
         """
@@ -67,10 +67,12 @@ class Product(BaseProduct, PrintMixin):
         return self.__price * self.quantity + other.__price * other.quantity
 
     @classmethod
-    def new_product(cls, product: Dict[str, Any], existing_products: Optional[List["Product"]] = None) -> "Product":
+    def new_product(
+            cls, product_date: Dict[str, Any], existing_products: Optional[List["Product"]] = None
+    ) -> "Product":
         """
         Классовый метод преобразования из словаря в объект класса
-        :param product: Словарь с параметрами продукта
+        :param product_date: Словарь с параметрами продукта
             Ожидаемые ключи: name, description, price, quantity
         :param existing_products: Список существующих продуктов(по умолчанию пустой)
         :return: Экземпляр класса Product
@@ -81,17 +83,12 @@ class Product(BaseProduct, PrintMixin):
             existing_products = []
 
         for existing_product in existing_products:
-            if existing_product.name == product.get("name"):
-                existing_product.quantity += product.get("quantity", 0)
-                existing_product.price = max(existing_product.price, product.get("price", existing_product.price))
+            if existing_product.name == product_date.get("name"):
+                existing_product.quantity += product_date.get("quantity", 0)
+                existing_product.price = max(existing_product.price, product_date.get("price", existing_product.price))
                 return existing_product
-        # new_product = cls(
-        #     name=product.get("name", ""),
-        #     description=product.get("description", ""),
-        #     price=product.get("price", 0.0),
-        #     quantity=product.get("quantity", 0),
-        # )
-        new_product = cls(**product)
+
+        new_product = cls(**product_date)
         existing_products.append(new_product)
         return new_product
 
