@@ -1,13 +1,14 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict
 
+
 class BaseProduct(ABC):
     """Абстрактный класс продуктов"""
 
     @classmethod
     @abstractmethod
-    def new_product(cls, product_date: Dict[str, Any]) -> "BaseProduct":
-        """Классовый метод преобразования из словаря в объект класса"""
+    def created_product(cls, product_date: Dict[str, Any]) -> "BaseProduct":
+        """Классовый метод создания экземпляра класса из словаря"""
         pass
 
 

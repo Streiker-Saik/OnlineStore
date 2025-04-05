@@ -16,10 +16,10 @@ def test_init_product(first_product: Product) -> None:
     assert first_product.quantity == 5
 
 
-def test_new_product() -> None:
+def test_created_product() -> None:
     """Тестирование на создание нового продукта"""
     product_one = {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14}
-    product = Product.new_product(product_one)
+    product = Product.created_product(product_one)
     assert product.name == "Xiaomi Redmi Note 11"
     assert product.description == "1024GB, Синий"
     assert product.price == 31000.0

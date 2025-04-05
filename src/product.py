@@ -67,8 +67,23 @@ class Product(BaseProduct, PrintMixin):
         return self.__price * self.quantity + other.__price * other.quantity
 
     @classmethod
+    def created_product(cls, product_date: Dict[str, Any]) -> "Product":
+        """
+        Классовый метод создания экземпляра класса из словаря
+        :param product_date: Словарь с параметрами продукта
+            Ожидаемые ключи: name, description, price, quantity
+        :return: Экземпляр класса Product
+        """
+        return cls(
+            name=product_date.get("name", ""),
+            description=product_date.get("description", ""),
+            price=product_date.get("price", 0.0),
+            quantity=product_date.get("quantity", 0),
+        )
+
+    @classmethod
     def new_product(
-            cls, product_date: Dict[str, Any], existing_products: Optional[List["Product"]] = None
+        cls, product_date: Dict[str, Any], existing_products: Optional[List["Product"]] = None
     ) -> "Product":
         """
         Классовый метод преобразования из словаря в объект класса
@@ -88,7 +103,7 @@ class Product(BaseProduct, PrintMixin):
                 existing_product.price = max(existing_product.price, product_date.get("price", existing_product.price))
                 return existing_product
 
-        new_product = cls(**product_date)
+        new_product = cls.created_product(product_date)
         existing_products.append(new_product)
         return new_product
 

@@ -44,8 +44,8 @@ poetry add --group dev pytest pytest-cov
 class BaseProduct:
 ```
 Абстрактный класс продуктов
-    def new_product(cls, product_date: Dict[str, Any]) -> "BaseProduct":
-        Классовый метод преобразования из словаря в объект класса
+    def created_product(cls, product_date: Dict[str, Any]) -> "BaseProduct":
+        Классовый метод создания экземпляра класса из словаря
 ```
 class BaseProduct:
 ```
@@ -85,6 +85,8 @@ class Product(BaseProduct, PrintMixin):
     __add__(self, other: 'Product') -> float:
         Возвращает общую стоимость товаров, как сумма стоимости товаров умноженная на их количество
         TypeError: Если переданный аргумент не является тем же классоом/подклассом.
+    created_product(cls, product_date: Dict[str, Any]) -> "Product":
+        Классовый метод создания экземпляра класса из словаря
     new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
         Создает новый экземпляр класса Product на основе данных из словаря.
         Если такой продукт с name существует в списке, обновляет количество и цену
@@ -111,6 +113,8 @@ class Smartphone(Product):
     __init__(self, name: str, description: str, price: float, quantity: int,
         efficiency: float, model: str, memory: int, color: str) -> None:
         Инициализирует экземпляр, наследуемого от Product класса Smartphone, с заданными атрибутам
+    created_product(cls, product_date: Dict[str, Any]) -> "Smartphone":
+        Классовый метод создания экземпляра класса из словаря
 ```
 
 ## Модуль src.product_lawngrass.py
@@ -127,6 +131,8 @@ class LawnGrass(Product):
     __init__(self, name: str, description: str, price: float, quantity: int,
         country: str, germination_period: str, color: str) -> None:
         Инициализирует экземпляр, наследуемого от Product класса LawnGrass, с заданными атрибутам
+    created_product(cls, product_date: Dict[str, Any]) -> "LawnGrass":
+        Классовый метод создания экземпляра класса из словаря
 ```
 
 ## Модуль src.category.py
