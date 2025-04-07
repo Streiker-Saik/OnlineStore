@@ -61,6 +61,6 @@ class Order(BaseEntity):
         self.total_price = self.quantity * self.product.price
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
     Order(product1, 5)
