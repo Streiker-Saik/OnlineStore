@@ -161,6 +161,8 @@ class Category(BaseEntity):
     products(self) -> str:
         Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
         <name>, <price> руб. Остаток: <quantity> шт.\n
+    middle_price(self):
+        Метод: ...
 ```
 
 ## Модуль src.order.py
