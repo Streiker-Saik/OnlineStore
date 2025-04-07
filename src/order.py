@@ -36,6 +36,7 @@ class Order(BaseEntity):
         self.product = product
         self.quantity = quantity
         self.total_price = quantity * product.price
+        super().__init__()
 
     def __str__(self) -> str:
         """
@@ -58,3 +59,8 @@ class Order(BaseEntity):
             raise ValueError("Количество не может быть меньше 0")
         self.quantity = new_quantity
         self.total_price = self.quantity * self.product.price
+
+
+if __name__ == '__main__':
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    Order(product1, 5)

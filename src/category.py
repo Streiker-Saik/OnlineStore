@@ -51,6 +51,7 @@ class Category(BaseEntity):
         self.__products = products if products else []
         Category.category_count += 1
         Category.product_count += len(self.__products)
+        super().__init__()
 
     def __str__(self) -> str:
         """
