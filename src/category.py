@@ -1,5 +1,6 @@
 from typing import List, Optional, Union
 
+from src.exceptions import ZeroQuantityError
 from src.interfaces import BaseEntity
 from src.product import Product
 
@@ -79,9 +80,20 @@ class Category(BaseEntity):
         if not isinstance(product, Product):
             raise TypeError("Не является классом Product или подклассом")
 
-        if product not in self.__products:
-            self.__products.append(product)
-            Category.product_count += 1
+        try:
+            if product.quantity == 0:
+                raise ZeroQuantityError("Товар с нулевым количеством не может быть добавлен")
+        except ZeroQuantityError as exc_info:
+            print(exc_info)
+        else:
+            if product not in self.__products:
+                self.__products.append(product)
+                Category.product_count += 1
+                print("Товар добавлен")
+            else:
+                print("Товар уже существует в категории")
+        finally:
+            print("Обработка добавления товара завершена")
 
     @property
     def products(self) -> str:

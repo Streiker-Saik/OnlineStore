@@ -26,6 +26,13 @@ def second_product() -> Product:
 
 
 @pytest.fixture
+def invalid_product() -> Product:
+    product = Product(name="Бракованный товар", description="Неверное количество", price=1000.0, quantity=1)
+    product.quantity = 0
+    return product
+
+
+@pytest.fixture
 def first_category() -> Category:
     return Category(
         name="Смартфоны",

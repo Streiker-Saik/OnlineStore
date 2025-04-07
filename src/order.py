@@ -1,3 +1,4 @@
+from src.exceptions import ZeroQuantityError
 from src.interfaces import BaseEntity
 from src.product import Product
 
@@ -30,9 +31,12 @@ class Order(BaseEntity):
         Метод для инициализации экземпляра заказа
         :param quantity: Количество продукта
         :param product: Продукт, который был куплен
+        :raise ZeroQuantityError: Если у продукта нулевое количество
 
         Высчитывает общую стоимость заказа продукта
         """
+        if product.quantity == 0:
+            raise ZeroQuantityError("Товар с нулевым количеством не может быть добавлен")
         self.product = product
         self.quantity = quantity
         self.total_price = quantity * product.price
@@ -59,8 +63,3 @@ class Order(BaseEntity):
             raise ValueError("Количество не может быть меньше 0")
         self.quantity = new_quantity
         self.total_price = self.quantity * self.product.price
-
-
-if __name__ == "__main__":
-    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
-    Order(product1, 5)

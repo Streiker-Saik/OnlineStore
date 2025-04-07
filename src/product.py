@@ -40,6 +40,7 @@ class Product(BaseProduct, PrintMixin):
         :param description: Описание продукта
         :param price: Цена продукта
         :param quantity: Количество продукта
+        :raise ValueError: Если переданное количество равно 0
         """
         self.name = name
         self.description = description

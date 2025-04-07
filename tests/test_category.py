@@ -56,3 +56,13 @@ def test_category_middle_price_empty_products() -> None:
         [],
     )
     assert category.middle_price() == 0
+
+
+def test_category_add_product_invalid(
+    capsys: pytest.CaptureFixture, first_category: Category, invalid_product: Product
+) -> None:
+    """тестирование, добавление продукта с нулевым количеством"""
+    first_category.add_product(invalid_product)
+    message = capsys.readouterr()
+    assert message.out.strip().split("\n")[-2] == "Товар с нулевым количеством не может быть добавлен"
+    assert message.out.strip().split("\n")[-1] == "Обработка добавления товара завершена"
