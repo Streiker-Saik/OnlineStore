@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 from src.product import Product
 
 
@@ -49,3 +51,22 @@ class Smartphone(Product):
         self.model = model
         self.memory = memory
         self.color = color
+
+    @classmethod
+    def created_product(cls, product_date: Dict[str, Any]) -> "Smartphone":
+        """
+        Классовый метод создания экземпляра класса из словаря
+        :param product_date: Словарь с параметрами продукта
+            Ожидаемые ключи: name, description, price, quantity, efficiency, model, memory, color
+        :return: Экземпляр класса Smartphone
+        """
+        return cls(
+            name=product_date.get("name", ""),
+            description=product_date.get("description", ""),
+            price=product_date.get("price", 0.0),
+            quantity=product_date.get("quantity", 0),
+            efficiency=product_date.get("efficiency", 0.0),
+            model=product_date.get("model", ""),
+            memory=product_date.get("memory", 0),
+            color=product_date.get("color", ""),
+        )

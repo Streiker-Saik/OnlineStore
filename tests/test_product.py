@@ -16,10 +16,10 @@ def test_init_product(first_product: Product) -> None:
     assert first_product.quantity == 5
 
 
-def test_new_product() -> None:
+def test_created_product() -> None:
     """Тестирование на создание нового продукта"""
     product_one = {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14}
-    product = Product.new_product(product_one)
+    product = Product.created_product(product_one)
     assert product.name == "Xiaomi Redmi Note 11"
     assert product.description == "1024GB, Синий"
     assert product.price == 31000.0
@@ -30,7 +30,7 @@ def test_new_product_in_existing_products() -> None:
     """Тестирование на создание нового продукта, c проверкой и изменением в списке созданных"""
     product_one = {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14}
     product_two = {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 45000.0, "quantity": 6}
-    product_free = {"name": "Iphone 15", "description": "512GB, Gray space", "price": 210000.0, "quantity": 8}
+    product_three = {"name": "Iphone 15", "description": "512GB, Gray space", "price": 210000.0, "quantity": 8}
     existing_products: List = []
 
     product = Product.new_product(product_one, existing_products)
@@ -45,7 +45,7 @@ def test_new_product_in_existing_products() -> None:
     assert product.quantity == 20
     assert len(existing_products) == 1
 
-    product = Product.new_product(product_free, existing_products)
+    product = Product.new_product(product_three, existing_products)
     assert product.price == 210000.0
     assert product.quantity == 8
     assert len(existing_products) == 2
@@ -55,7 +55,7 @@ def test_product_update(capsys: pytest.CaptureFixture, first_product: Product) -
     """Тестирование на ввод корректной цены больше 0"""
     first_product.price = -100.5
     message = capsys.readouterr()
-    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+    assert message.out.strip().split("\n")[-1] == "Цена не должна быть нулевая или отрицательная"
 
 
 @patch("builtins.input")

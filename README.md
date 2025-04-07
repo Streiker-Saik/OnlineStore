@@ -40,8 +40,33 @@ poetry add --group dev pytest pytest-cov
 
 # Примеры работы функций:
 
+## Модуль src.interfaces.py
+class BaseProduct:
+```
+Абстрактный класс продуктов
+    def created_product(cls, product_date: Dict[str, Any]) -> "BaseProduct":
+        Классовый метод создания экземпляра класса из словаря
+```
+class BaseProduct:
+```
+Абстрактный класс сущностей
+    __str__(self) -> str:
+        Строковое отображение класса
+```
+
+## Модуль src.mixins.py
+class PrintMixin:
+```
+Класс-миксин, печати в консоль
+    __init__(self) -> None:
+        Инициализация экземпляра класса с выводом в терминал
+    __repr__(self) -> str:
+        Строка класса с параметрами
+            Формат: "<class_name>(<attribute1>, ...)"
+```
+
 ## Модуль src.product.py
-class Product:
+class Product(BaseProduct, PrintMixin):
 ```
 Класс для предоставления продукта
 
@@ -60,6 +85,8 @@ class Product:
     __add__(self, other: 'Product') -> float:
         Возвращает общую стоимость товаров, как сумма стоимости товаров умноженная на их количество
         TypeError: Если переданный аргумент не является тем же классоом/подклассом.
+    created_product(cls, product_date: Dict[str, Any]) -> "Product":
+        Классовый метод создания экземпляра класса из словаря
     new_product(cls, product: Dict[str, Any], existing_products: List['Product']) -> 'Product':
         Создает новый экземпляр класса Product на основе данных из словаря.
         Если такой продукт с name существует в списке, обновляет количество и цену
@@ -86,6 +113,8 @@ class Smartphone(Product):
     __init__(self, name: str, description: str, price: float, quantity: int,
         efficiency: float, model: str, memory: int, color: str) -> None:
         Инициализирует экземпляр, наследуемого от Product класса Smartphone, с заданными атрибутам
+    created_product(cls, product_date: Dict[str, Any]) -> "Smartphone":
+        Классовый метод создания экземпляра класса из словаря
 ```
 
 ## Модуль src.product_lawngrass.py
@@ -102,10 +131,12 @@ class LawnGrass(Product):
     __init__(self, name: str, description: str, price: float, quantity: int,
         country: str, germination_period: str, color: str) -> None:
         Инициализирует экземпляр, наследуемого от Product класса LawnGrass, с заданными атрибутам
+    created_product(cls, product_date: Dict[str, Any]) -> "LawnGrass":
+        Классовый метод создания экземпляра класса из словаря
 ```
 
 ## Модуль src.category.py
-class Category:
+class Category(BaseEntity):
 ```
 Класс категорий продукта
 
@@ -120,8 +151,8 @@ class Category:
     __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
         Инициализирует экземпляр класса Category с заданными атрибутам
     __str__(self) -> str:
-        возвращает строковое отображение класса Category. 
-            Формат: <name>, количество продуктов: <sum(product.quantity)> шт.
+        Возвращает строковое отображение класса Category. 
+        Формат: <name>, количество продуктов: <sum(product.quantity)> шт.
     get_products(self) -> List[Product]:
         Getter: возвращает список продуктов в категории
     add_product(self, product: Product) -> None:
@@ -130,6 +161,28 @@ class Category:
     products(self) -> str:
         Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
         <name>, <price> руб. Остаток: <quantity> шт.\n
+```
+
+## Модуль src.order.py
+class Order(BaseEntity):
+```
+Класс категорий продукта
+
+Атрибуты:
+    product(Product): Продукт, который был куплен
+    quantity(int): Количество купленного продукта
+    over_price(float): Общая стоимость
+
+Методы:
+    __init__(self, product: Product, quantity: int) -> None:
+        Инициализации экземпляра заказа
+    __str__(self) -> str:
+        Возвращает строковое отображение класса. Формат:
+        <product.name>, <quantity> шт: <total_price> руб
+    update_quantity(self, new_quantity: int) -> None:
+        Метод: обновление количество в заказе
+        TypeError: Если переданный аргумент не является целым числом
+        ValueError: Если переданный аргумент отрицательный
 ```
 
 ## Модуль src.products_iterator.py
@@ -148,6 +201,7 @@ class ProductIterator:
     __next__(self) -> Product:
         Возвращает следующий продукт в категории
 ```
+
 ## Модуль src.utils.py
 reader_json
 - принимает путь к json файлу

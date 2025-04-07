@@ -1,4 +1,5 @@
 from src.category import Category
+from src.product import Product
 from src.product_lawngrass import LawnGrass
 from src.product_smartphone import Smartphone
 
@@ -83,3 +84,24 @@ if __name__ == "__main__":
         print("Возникла ошибка TypeError при добавлении не продукта")
     else:
         print("Не возникла ошибка TypeError при добавлении не продукта")
+
+    my_product = Product.new_product(
+        {
+            "name": "a",
+            "price": 1.0,
+            "quantity": 2,
+            "description": "b"
+        }
+    )
+    print(my_product)
+    grass = LawnGrass.new_product(
+        {
+            "name": "a1",
+            "description": "b1",
+            "price": 1.0,
+            "quantity": 2,
+            "country": "c1",
+            "germination_period": "d1",
+            "color": "e1"
+        }
+    )
