@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from src.interfaces import BaseEntity
 from src.product import Product
@@ -95,6 +95,15 @@ class Category(BaseEntity):
             products_str += f"{str(product)}\n"
         return products_str.strip()
 
-    def middle_price(self):
-        """"""
-        pass
+    def middle_price(self) -> Union[int, float]:
+        """
+        Метод подсчитывает средний ценник всех товаров в категории
+        :return: Средний ценник всех товаров(округление до 2 знаков после запятой)
+            Если в категории нет товаров, выводит 0
+        """
+        try:
+            result = sum([product.price for product in self.__products]) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
+        else:
+            return round(result, 2)
