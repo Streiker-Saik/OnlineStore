@@ -79,6 +79,7 @@ class Product(BaseProduct, PrintMixin):
 Методы:
     __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         Инициализирует экземпляр класса Product с заданными атрибутам
+        ValueError: Если попытка создания с нулевым количеством
     __str__(self) -> str:
         Возвращает строковое отображение класса Product. 
             Формат: <name>, <price> руб. Остаток: <quantity> шт.
