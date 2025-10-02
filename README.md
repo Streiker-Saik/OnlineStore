@@ -79,6 +79,7 @@ class Product(BaseProduct, PrintMixin):
 Методы:
     __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         Инициализирует экземпляр класса Product с заданными атрибутам
+        ValueError: Если создания с нулевым количеством
     __str__(self) -> str:
         Возвращает строковое отображение класса Product. 
             Формат: <name>, <price> руб. Остаток: <quantity> шт.
@@ -161,6 +162,9 @@ class Category(BaseEntity):
     products(self) -> str:
         Getter: возвращает строку с информацией о продуктах о продуктах в категории. Формат:
         <name>, <price> руб. Остаток: <quantity> шт.\n
+    middle_price(self) -> Union[int, float]:
+        Метод: подсчитывает средний ценник всех товаров в категории(округление до 2 знаков после запятой)
+            Если в категории нет товаров, выводит 0
 ```
 
 ## Модуль src.order.py
@@ -176,6 +180,7 @@ class Order(BaseEntity):
 Методы:
     __init__(self, product: Product, quantity: int) -> None:
         Инициализации экземпляра заказа
+        ZeroQuantityError: Если у продукта нулевое количество
     __str__(self) -> str:
         Возвращает строковое отображение класса. Формат:
         <product.name>, <quantity> шт: <total_price> руб
@@ -183,6 +188,16 @@ class Order(BaseEntity):
         Метод: обновление количество в заказе
         TypeError: Если переданный аргумент не является целым числом
         ValueError: Если переданный аргумент отрицательный
+```
+
+## Модуль src.exceptions.py
+class ZeroQuantityError(Exception):
+```
+Исключение, добавление продукта с нулевым количеством
+
+Методы:
+    __init__(self, message: Optional[str] = None) -> None:
+        Инициализации исключения ZeroQuantityError
 ```
 
 ## Модуль src.products_iterator.py

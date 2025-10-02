@@ -40,10 +40,13 @@ class Product(BaseProduct, PrintMixin):
         :param description: Описание продукта
         :param price: Цена продукта
         :param quantity: Количество продукта
+        :raise ValueError: Если переданное количество равно 0
         """
         self.name = name
         self.description = description
         self.__price = price
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         self.quantity = quantity
         super().__init__()
 

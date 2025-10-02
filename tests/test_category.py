@@ -38,6 +38,31 @@ def test_category_products_list_property(first_category: Category) -> None:
     )
 
 
-def test_product_str(first_category: Product) -> None:
+def test_category_str(first_category: Category) -> None:
     """Тестирование строкового отображения класса"""
     assert str(first_category) == "Смартфоны, количество продуктов: 13 шт."
+
+
+def test_category_middle_price(first_category: Category) -> None:
+    """Тестирование подсчитывания средних цен всех товаров в категории"""
+    assert first_category.middle_price() == 195000
+
+
+def test_category_middle_price_empty_products() -> None:
+    """Тестирование подсчитывания средних цен всех товаров в категории, при отсутствии товаров"""
+    category = Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни",
+        [],
+    )
+    assert category.middle_price() == 0
+
+
+def test_category_add_product_invalid(
+    capsys: pytest.CaptureFixture, first_category: Category, invalid_product: Product
+) -> None:
+    """тестирование, добавление продукта с нулевым количеством"""
+    first_category.add_product(invalid_product)
+    message = capsys.readouterr()
+    assert message.out.strip().split("\n")[-2] == "Товар с нулевым количеством не может быть добавлен"
+    assert message.out.strip().split("\n")[-1] == "Обработка добавления товара завершена"

@@ -2,7 +2,9 @@ from typing import Any, Type
 
 import pytest
 
+from src.exceptions import ZeroQuantityError
 from src.order import Order
+from src.product import Product
 
 
 def test_order_init(test_order: Order) -> None:
@@ -39,3 +41,10 @@ def test_order_update_quantity_error(
     with pytest.raises(expected) as exc_info:
         test_order.update_quantity(new_quantity)
     assert exc_message in str(exc_info.value)
+
+
+def test_orders_init_error(invalid_product: Product) -> None:
+    """Тестирование при создании заказа с продуктом количество которое равно 0"""
+    with pytest.raises(ZeroQuantityError) as exc_info:
+        Order(invalid_product, 5)
+    assert "Товар с нулевым количеством не может быть добавлен" in str(exc_info.value)

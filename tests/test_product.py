@@ -94,3 +94,9 @@ def test_smartphone_add_error(first_smartphone: Smartphone, first_grass: LawnGra
     with pytest.raises(TypeError) as exc_info:
         first_smartphone + first_grass
     assert "Не возможно сложить разные классы/подклассы" in str(exc_info)
+
+
+def test_product_zero_price() -> None:
+    """Тестирование, добавление товара с 0 количеством"""
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product("Бракованный товар", "Неверное количество", 1000.0, 0)
